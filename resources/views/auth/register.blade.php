@@ -4,6 +4,10 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="d-flex justify-content-around py-3">
+                <div class="message text-center d-none text-danger"></div>
+                <input type="button" id="close" value="Chiudi" class="d-none">
+            </div>
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
@@ -88,4 +92,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+@vite(['resources/js/registration.js'])
 @endsection

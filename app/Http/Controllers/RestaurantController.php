@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
@@ -15,7 +17,12 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+    $user = Auth::user(); 
+    $user_id = $user->id; 
+
+    // Ora puoi usare $user_id nella tua query
+    $restaurants = Restaurant::where('user_id', $user_id)->paginate(5);
+    return view('admin.restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -25,7 +32,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -34,9 +41,15 @@ class RestaurantController extends Controller
      * @param  \App\Http\Requests\StoreRestaurantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRestaurantRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $restaurant = new Restaurant;
+        // associo ristorante all'utente loggato
+        $restaurant->user_id = $request->user()->id;
+        $restaurant->fill($data);
+        $restaurant->save();
+        return redirect()->route('admin.restaurant.show', $restaurant);
     }
 
     /**
@@ -47,7 +60,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('admin.restaurants.show', compact('restaurant'));
     }
 
     /**
@@ -58,7 +71,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return view('admin.restaurants.edit ', compact('restaurant'));
     }
 
     /**
@@ -68,9 +81,11 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
+    public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        $data = $request->all();
+        $restaurant->update($data);
+        return redirect()->route('admin.restaurant.show', $restaurant);
     }
 
     /**
@@ -81,6 +96,7 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect()->route('admin.restaurant.index');
     }
 }

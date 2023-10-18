@@ -13,6 +13,10 @@ class Dish extends Model
 
     protected $fillable = ['restaurant_id','name','description','ingredients', 'visible','price'];
 
+    public static function generateSlug($name){
+        return Str::slug($name, '-');
+    }
+    
     public function restaurant() : BelongsTo {
         return $this->belongsTo(Restaurant::class);
     }

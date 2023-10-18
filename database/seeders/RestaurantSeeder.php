@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Restaurant;
+use Illuminate\Support\Str;
 
 class RestaurantSeeder extends Seeder
 {
@@ -17,12 +19,12 @@ class RestaurantSeeder extends Seeder
         $restaurants = config("restaurants_db");
         foreach ($restaurants as $restaurant)
         {
-            $newRestaurant = new restaurant();
+            $newRestaurant = new Restaurant();
             $newRestaurant->name = $restaurant['name'];
             $newRestaurant->slug = Str::slug($restaurant['name']);
-            $newRestaurant->price = $restaurant["price"];
-            $newRestaurant->image = $restaurant["image"];
-            $newRestaurant->description = $restaurant["description"];
+            $newRestaurant->address = $restaurant["address"];
+            $newRestaurant->piva = $restaurant["piva"];
+            $newRestaurant->photo = $restaurant["photo"];
             $newRestaurant->save();
         }
     }

@@ -59,6 +59,11 @@
                                     <i class="fa-regular fa-chart-bar"></i>
                                     {{__('Dashboard')}}
                                 </a>
+                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dashboard' ? 'bg-primary' : ''}}"
+                                aria-current="page" href="{{route('admin.restaurant.index')}}">
+                                <i class="fa-regular fa-chart-bar"></i>
+                                {{__('Restaurant')}}
+                            </a>
                             </li>
                         </ul>
                     </div>

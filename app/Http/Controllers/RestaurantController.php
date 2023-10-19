@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
@@ -57,6 +58,8 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $data = $this->validation($request->all());
+        $img_path = Storage::disk('public')->put('uploads', $data['photo']);
+        $data['photo'] = $img_path;
       
         $restaurant = new Restaurant;
         // associo ristorante all'utente loggato
@@ -98,6 +101,8 @@ class RestaurantController extends Controller
     public function update(Request $request, Restaurant $restaurant)
     {
         $data = $this->validation($request->all());
+        $img_path = Storage::disk('public')->put('uploads', $data['photo']);
+        $data['photo'] = $img_path;
         $restaurant->update($data);
         return redirect()->route('admin.restaurant.show', $restaurant);
     }
@@ -110,6 +115,12 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+                // Delete image from storage
+                if($restaurant->photo) Storage::delete($restaurant->photo);
+                $restaurant->photo = null;
+                $restaurant->save();
+        
+        
         $restaurant->delete();
         return redirect()->route('admin.restaurant.index');
     }
@@ -122,7 +133,7 @@ class RestaurantController extends Controller
             [
                 'name' => 'required|max:60',
                 'address' => 'required|min:5',
-                'image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+                'photo' => 'image|mimes:jpg,png,jpeg,gif,svg',
                 'piva' => 'required|size:11'
               
             ],
@@ -133,8 +144,8 @@ class RestaurantController extends Controller
                 'address.required' => 'The address is required.',
                 'address.min' => 'The address must have a minimum of 5 characters.',
 
-                'image.image' => 'Must be an image.',
-                'image.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
+                'photo.image' => 'Must be an image.',
+                'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
 
                 'piva.required' => 'Vat is required',
                 'piva.size' => 'Vat must have 11 characters',

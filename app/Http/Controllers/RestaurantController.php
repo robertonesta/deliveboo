@@ -61,8 +61,8 @@ class RestaurantController extends Controller
         $img_path = Storage::disk('public')->put('uploads', $data['photo']);
         $data['photo'] = $img_path;
 
-        $slug = Restaurant::generateSlug($val_data['name']);
-        $val_data['slug'] = $slug;
+        $slug = Restaurant::generateSlug($data['name']);
+        $data['slug'] = $slug;
       
         $restaurant = new Restaurant;
         // associo ristorante all'utente loggato

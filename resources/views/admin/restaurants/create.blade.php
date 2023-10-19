@@ -3,7 +3,7 @@
 
 <div>
     <h1 class="text-center">Enter your restaurant's details.</h1>
-    <form action="{{ route('admin.restaurant.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="col-md-10 mb-3">

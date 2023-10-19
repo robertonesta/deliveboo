@@ -32,6 +32,18 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        $user_id = $user->id;
+    
+        // Verifico se esiste già un ristorante associato all'utente loggato
+        $existingRestaurant = Restaurant::where('user_id', $user_id)->first();
+    
+        // Se esiste già un ristorante, redirect alla show
+        if ($existingRestaurant) {
+            return redirect()->route('admin.restaurant.show', $existingRestaurant);
+        }
+    
+        // Se non esiste alcun ristorante, mostra il form per crearne uno nuovo
         return view('admin.restaurants.create');
     }
 

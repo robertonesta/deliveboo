@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-
+{{-- Mostro solo se esiste un ristorante --}}
+@if(count($restaurants) > 0)
     <table class="table table-striped">
         <thead>
             <tr>
@@ -56,9 +57,18 @@
                 </div>
             </div>
             @endforeach
-            <a href="{{ route('admin.restaurant.create') }}" role="button" class="btn btn-primary">Crea</a>
+         
         </tbody>
     </table>
+    {{-- Mostro il pulsante per creare il ristorante --}}
+    @else 
+    <div class=" m-5 alert alert-info" role="alert">
+       Aggiungi il tuo ristorante
+    </div>
+    <div class="text-center">
+        <a href="{{ route('admin.restaurant.create') }}" role="button" class="btn btn-primary">Vai alla creazione del tuo Ristorante</a>
+    </div>
+    @endif
     
     {{-- Se è stata usata la paginazione --}}
     {{ $restaurants->links('pagination::bootstrap-5') }}

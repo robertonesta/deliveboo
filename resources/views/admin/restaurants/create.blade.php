@@ -2,7 +2,6 @@
 @section('content')
 
 <div>
-
     <h1 class="text-center">INSERISCI I DATI DEL TUO RISTORANTE</h1>
     <form action="{{ route('admin.restaurant.store') }}" method="POST">
         @csrf
@@ -70,14 +69,8 @@
         @enderror
         </div>
     
-    
-    
-    
-    
-        
-    
-    
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>
     </div>
+
 @endsection

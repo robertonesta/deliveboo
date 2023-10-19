@@ -42,7 +42,7 @@ class RestaurantController extends Controller
     
         // Se esiste già un ristorante, redirect alla show
         if ($existingRestaurant) {
-            return redirect()->route('admin.restaurant.show', $existingRestaurant);
+            return redirect()->route('admin.restaurants.show', $existingRestaurant);
         }
     
         // Se non esiste alcun ristorante, mostra il form per crearne uno nuovo
@@ -60,13 +60,16 @@ class RestaurantController extends Controller
         $data = $this->validation($request->all());
         $img_path = Storage::disk('public')->put('uploads', $data['photo']);
         $data['photo'] = $img_path;
+
+        $slug = Restaurant::generateSlug($val_data['name']);
+        $val_data['slug'] = $slug;
       
         $restaurant = new Restaurant;
         // associo ristorante all'utente loggato
         $restaurant->user_id = $request->user()->id;
         $restaurant->fill($data);
         $restaurant->save();
-        return redirect()->route('admin.restaurant.show', $restaurant);
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A new dish has been added successfully');
     }
 
     /**
@@ -101,10 +104,12 @@ class RestaurantController extends Controller
     public function update(Request $request, Restaurant $restaurant)
     {
         $data = $this->validation($request->all());
-        $img_path = Storage::disk('public')->put('uploads', $data['photo']);
-        $data['photo'] = $img_path;
+        if($request->hasFile('photo')){
+            $img_path = Storage::disk('public')->put('uploads', $data['photo']);
+            $data['photo'] = $img_path;
+        };
         $restaurant->update($data);
-        return redirect()->route('admin.restaurant.show', $restaurant);
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'The restaurant has been edited successfully');
     }
 
     /**
@@ -117,12 +122,11 @@ class RestaurantController extends Controller
     {
                 // Delete image from storage
                 if($restaurant->photo) Storage::delete($restaurant->photo);
-                $restaurant->photo = null;
                 $restaurant->save();
         
         
         $restaurant->delete();
-        return redirect()->route('admin.restaurant.index');
+        return redirect()->route('admin.restaurants.index')->with('message', 'The restaurant has been deleted successfully');
     }
 
 

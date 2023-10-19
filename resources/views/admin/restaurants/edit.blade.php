@@ -1,10 +1,11 @@
 @extends('layouts.admin')
+
+
 @section('content')
-
-<div>
-
-    <h1 class="text-center">Edit your restaurant's details.</h1>
-    <form action="{{ route('admin.restaurant.update', $restaurant) }}" method="POST" enctype="multipart/form-data">
+<div class="container">
+<h2 class="fs-4 text-secondary my-4">Edit restaurant</h2>
+    @include('partials.validation_error')
+    <form action="{{ route('admin.restaurants.update', $restaurant) }}" method="POST" enctype="multipart/form-data">
         @method('PUT') 
         @csrf
         <div class="col-md-10 mb-3">
@@ -58,15 +59,17 @@
         </div>
 
     </div>
-    <div class="row  mb-3">
+    <div class="row mb-3">
         <div class="col-md-10 ">
           <label for="photo" class="form-label">Picture</label>
         </div>
         <div class="col-md-10">
-          <input type="file" 
-            name="photo" 
-            id="photo" 
-            class="form-control @error('photo') is-invalid @enderror" />
+        @if (Str::contains($restaurant->photo, 'photo'))
+                    <img src=" {{ asset('storage/' .$restaurant->photo)}}" class="card-img-top w-25" alt="...">
+                    @else
+                    <img class="card-img-top rounded w-25" src="{{ asset('storage/' .$restaurant->photo)}}" alt="">
+                    @endif
+          <input type="file" name="photo" id="photo" value="{{old('photo', $restaurant->photo)}}" class="form-control @error('photo') is-invalid @enderror" />
           @error('photo')
             <div class="invalid-feedback">
               {{ $message }}

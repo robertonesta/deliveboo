@@ -77,8 +77,9 @@ class DishController extends Controller
      */
     public function update(UpdateDishRequest $request, Dish $dish)
     {
+        $visible = $request->has('visible') ? 1 : 0;
         $val_data = $request ->validated();
-        dd($val_data);
+        $val_data['visible'] = $visible;
         $dish->update($val_data);
         return to_route('admin.dishes.index')->with('message', 'The dish has been edited successfully');
     }

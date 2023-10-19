@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');            
-            $table->string('description');
-            $table->string('ingredients');
-            $table->tinyInteger('visible');
+            $table->string('description')->nullable();
+            $table->string('ingredients')->nullable();
+            $table->boolean('visible')->default(false);
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });

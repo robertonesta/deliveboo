@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Dish extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['restaurant_id','name','description','ingredients', 'visible','price'];
+    protected $fillable = ['restaurant_id','name', 'slug', 'description', 'ingredients', 'visible' ,'price'];
 
     public static function generateSlug($name){
         return Str::slug($name, '-');

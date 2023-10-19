@@ -2,11 +2,11 @@
 @section('content')
 
 <div>
-    <h1 class="text-center">INSERISCI I DATI DEL TUO RISTORANTE</h1>
+    <h1 class="text-center">Enter your restaurant's details.</h1>
     <form action="{{ route('admin.restaurant.store') }}" method="POST">
         @csrf
         <div class="col-md-10">
-            <label for="title" class="form-label">Nome</label>
+            <label for="name" class="form-label">Name</label>
         <input 
             type="text" 
             class="form-control @error('name') is-invalid @enderror" 
@@ -14,7 +14,7 @@
             name="name" 
             value="{{old('name')}}" 
         />
-        @error('title')
+        @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -22,7 +22,7 @@
         </div>
     
         <div class="col-md-10">
-            <label for="description" class="form-label">Indirizzo</label>
+            <label for="address" class="form-label">Address</label>
         <input 
             type="text" 
             class="form-control @error('address') is-invalid @enderror" 
@@ -39,7 +39,7 @@
     
     
         <div class="col-md-10">
-            <label for="piva" class="form-label">Inserisci partita iva</label>
+            <label for="piva" class="form-label">Enter VAT Number</label>
         <input 
             type="text" 
             class="form-control @error('piva') is-invalid @enderror" 
@@ -53,21 +53,7 @@
             </div>
         @enderror
         </div>
-        <div class="col-md-10">
-            <label for="slug" class="form-label">slug</label>
-        <input 
-            type="text" 
-            class="form-control @error('slug') is-invalid @enderror" 
-            id="slug" 
-            name="slug" 
-            value="{{old('slug')}}" 
-        />
-        @error('piva')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-        </div>
+
     
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>

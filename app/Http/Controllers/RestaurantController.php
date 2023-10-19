@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantController extends Controller
 {
@@ -55,7 +56,8 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $this->validation($request->all());
+      
         $restaurant = new Restaurant;
         // associo ristorante all'utente loggato
         $restaurant->user_id = $request->user()->id;
@@ -95,7 +97,7 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        $data = $request->all();
+        $data = $this->validation($request->all());
         $restaurant->update($data);
         return redirect()->route('admin.restaurant.show', $restaurant);
     }
@@ -110,5 +112,35 @@ class RestaurantController extends Controller
     {
         $restaurant->delete();
         return redirect()->route('admin.restaurant.index');
+    }
+
+
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => 'required|max:60',
+                'address' => 'required|min:5',
+                'image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+                'piva' => 'required|size:11'
+              
+            ],
+            [
+                'name.required' => 'Name is required.',
+                'name.max' => 'The name must have a maximum of 60 characters.',
+            
+                'address.required' => 'The address is required.',
+                'address.min' => 'The address must have a minimum of 5 characters.',
+
+                'image.image' => 'Must be an image.',
+                'image.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
+
+                'piva.required' => 'Vat is required',
+                'piva.size' => 'Vat must have 11 characters',
+
+            ]
+        )->validate();
+        return $validator;
     }
 }

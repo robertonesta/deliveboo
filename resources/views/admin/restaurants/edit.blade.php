@@ -3,12 +3,12 @@
 
 <div>
 
-    <h1 class="text-center">INSERISCI I DATI DEL TUO RISTORANTE</h1>
+    <h1 class="text-center">Edit your restaurant's details.</h1>
     <form action="{{ route('admin.restaurant.update', $restaurant) }}" method="POST">
         @method('PUT') 
         @csrf
-        <div class="col-md-10">
-            <label for="title" class="form-label">Nome</label>
+        <div class="col-md-10 mb-3">
+            <label for="name" class="form-label">Name</label>
         <input 
             type="text" 
             class="form-control @error('name') is-invalid @enderror" 
@@ -17,15 +17,15 @@
             value="{{old('name', $restaurant->name)}}" 
           
         />
-        @error('title')
+        @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
         @enderror
         </div>
     
-        <div class="col-md-10">
-            <label for="description" class="form-label">Indirizzo</label>
+        <div class="col-md-10 mb-3">
+            <label for="address" class="form-label">Address</label>
         <input 
             type="text" 
             class="form-control @error('address') is-invalid @enderror" 
@@ -41,29 +41,14 @@
         </div>
     
     
-        <div class="col-md-10">
-            <label for="piva" class="form-label">Inserisci partita iva</label>
+        <div class="col-md-10 mb-3" >
+            <label for="piva" class="form-label">Enter VAT Number</label>
         <input 
             type="text" 
             class="form-control @error('piva') is-invalid @enderror" 
             id="piva" 
             name="piva" 
             value="{{old('piva', $restaurant->piva)}}" 
-        />
-        @error('piva')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-        </div>
-        <div class="col-md-10">
-            <label for="slug" class="form-label">slug</label>
-        <input 
-            type="text" 
-            class="form-control @error('slug') is-invalid @enderror" 
-            id="slug" 
-            name="slug" 
-            value="{{old('slug, $restaurant->slug')}}" 
         />
         @error('piva')
             <div class="invalid-feedback">

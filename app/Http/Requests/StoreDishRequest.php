@@ -13,7 +13,7 @@ class StoreDishRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class StoreDishRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'description' => 'nullable|max:3000',
+            'ingredients' => 'nullable|max:3000',
+            'visible' => 'boolean',
+            'price' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'This dish must have a name!',
+            'description.max' => 'The description length cannot be more than 3000 characters!',
+            'ingredients.max' => 'The ingredients section length cannot be more than 3000 characters!',
+            'price.required' => 'This dish must have a price!',
         ];
     }
 }

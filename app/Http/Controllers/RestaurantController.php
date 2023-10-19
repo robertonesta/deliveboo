@@ -58,8 +58,10 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $data = $this->validation($request->all());
-        $img_path = Storage::disk('public')->put('uploads', $data['photo']);
-        $data['photo'] = $img_path;
+        if($request->hasFile('photo')){
+            $img_path = Storage::disk('public')->put('uploads', $data['photo']);
+            $data['photo'] = $img_path;
+        };
 
         $slug = Restaurant::generateSlug($data['name']);
         $data['slug'] = $slug;
@@ -137,7 +139,7 @@ class RestaurantController extends Controller
             [
                 'name' => 'required|max:60',
                 'address' => 'required|min:5',
-                'photo' => 'image|mimes:jpg,png,jpeg,gif,svg',
+                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
                 'piva' => 'required|size:11'
               
             ],
@@ -149,6 +151,7 @@ class RestaurantController extends Controller
                 'address.min' => 'The address must have a minimum of 5 characters.',
 
                 'photo.image' => 'Must be an image.',
+                'photo.required' => 'The photo is required.',
                 'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
 
                 'piva.required' => 'Vat is required',

@@ -66,7 +66,7 @@
        Aggiungi il tuo ristorante
     </div>
     <div class="text-center">
-        <a href="{{ route('admin.restaurant.create') }}" role="button" class="btn btn-primary">Vai alla creazione del tuo Ristorante</a>
+        <a href="{{ route('admin.restaurants.create') }}" role="button" class="btn btn-primary">Vai alla creazione del tuo Ristorante</a>
     </div>
     @endif
     

@@ -4,7 +4,7 @@
 <div>
 
     <h1 class="text-center">Edit your restaurant's details.</h1>
-    <form action="{{ route('admin.restaurant.update', $restaurant) }}" method="POST">
+    <form action="{{ route('admin.restaurant.update', $restaurant) }}" method="POST" enctype="multipart/form-data">
         @method('PUT') 
         @csrf
         <div class="col-md-10 mb-3">
@@ -56,6 +56,24 @@
             </div>
         @enderror
         </div>
+
+    </div>
+    <div class="row  mb-3">
+        <div class="col-md-10 ">
+          <label for="photo" class="form-label">Picture</label>
+        </div>
+        <div class="col-md-10">
+          <input type="file" 
+            name="photo" 
+            id="photo" 
+            class="form-control @error('photo') is-invalid @enderror" />
+          @error('photo')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        </div>
+    </div>
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>
     </div>

@@ -5,6 +5,7 @@
     <h1 class="text-center">Enter your restaurant's details.</h1>
     <form action="{{ route('admin.restaurant.store') }}" method="POST">
         @csrf
+
         <div class="col-md-10">
             <label for="name" class="form-label">Name</label>
         <input 
@@ -55,7 +56,7 @@
         </div>
 
     
-        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="submit" class="btn btn-primary mt-3">Salva</button>
     </form>
     </div>
 

@@ -12,7 +12,7 @@ class Dish extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['restaurant_id','name', 'slug', 'description', 'ingredients', 'visible' ,'price'];
+    protected $fillable = ['restaurant_id','name', 'photo', 'slug', 'description', 'ingredients', 'visible' ,'price'];
 
     public static function generateSlug($name){
         return Str::slug($name, '-');

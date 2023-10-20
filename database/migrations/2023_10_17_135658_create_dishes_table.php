@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ingredients')->nullable();
             $table->boolean('visible')->default(false);
             $table->decimal('price', 10, 2);
+            $table->text('photo');
             $table->timestamps();
         });
     }

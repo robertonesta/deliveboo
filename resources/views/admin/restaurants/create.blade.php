@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-    <h1 class="text-center">Inserisci i dettagli del tuo Ristorante</h1>
+    <h2 class="text-center fs-1">Inserisci i dettagli del tuo Ristorante</h2>
     <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

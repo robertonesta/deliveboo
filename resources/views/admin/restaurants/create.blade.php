@@ -13,7 +13,8 @@
                 class="form-control @error('name') is-invalid @enderror" 
                 id="name" 
                 name="name" 
-                value="{{ old('name') }}" 
+                value="{{ old('name') }}"
+                placeholder="Inserisci il nome del tuo Ristorante" 
             />
             @error('name')
                 <div class="invalid-feedback">
@@ -30,6 +31,7 @@
                 id="address" 
                 name="address" 
                 value="{{ old('address') }}" 
+                placeholder="Inserisci l'indirizzo"
             />
             @error('address')
                 <div class="invalid-feedback">
@@ -39,13 +41,14 @@
         </div>
 
         <div class="col-md-10 mb-3">
-            <label for="piva" class="form-label">Inserisci partita iva</label>
+            <label for="piva" class="form-label">Partita iva</label>
             <input 
                 type="text" 
                 class="form-control @error('piva') is-invalid @enderror" 
                 id="piva" 
                 name="piva" 
                 value="{{ old('piva') }}" 
+                placeholder="Inserisci la partita iva"
             />
             @error('piva')
                 <div class="invalid-feedback">
@@ -72,7 +75,7 @@
                                         id="typology-{{ $typology->id }}" 
                                         value="{{ $typology->id }}" 
                                         name="typologies[]"
-                                        class="form-check-input" <!-- Aggiunto class form-check-input -->
+                                        class="form-check-input" 
                                         @if(in_array($typology->id, old('typologies', []))) checked @endif
                                     >
                                     <label class="form-check-label" for="typology-{{ $typology->id }}">

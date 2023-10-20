@@ -81,7 +81,7 @@ class RestaurantController extends Controller
         $restaurant->typologies()->attach($request->typologies);
         }
         // return
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A Restaurant has been added successfully');
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'Il ristorante è stato aggiunto correttamente');
 
         
     }
@@ -137,7 +137,8 @@ class RestaurantController extends Controller
             $restaurant->typologies()->detach();
         }
     
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'The restaurant has been edited successfully');
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'Il ristorante è stato modificato correttamente
+        ');
     }
     
     /**
@@ -154,7 +155,7 @@ class RestaurantController extends Controller
         
         
         $restaurant->delete();
-        return redirect()->route('admin.restaurants.index')->with('message', 'The restaurant has been deleted successfully');
+        return redirect()->route('admin.restaurants.index')->with('message', 'Il ristorante è stato eliminato correttamente');
     }
 
 

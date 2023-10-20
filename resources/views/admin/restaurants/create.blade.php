@@ -54,6 +54,43 @@
             </div>
         @enderror
         </div>
+{{-- aggiunta tipologia di ristorante --}}
+        <div class="col-md-10 mb-3">
+    <div class="col-lg-2 col-md-2 text-center text-md-end">
+        <label class="form-label">Typologies</label>
+    </div>
+    <div class="col-lg-10 col-md-10">
+        <div class="row">
+            @php
+                $typologiesChunks = $typologies->chunk(ceil($typologies->count() / 4));
+            @endphp
+            @foreach ($typologiesChunks as $chunk)
+                <div class="col-md-4 col-lg-3 col-sm-6">
+                    @foreach ($chunk as $typology)
+                        <div class="form-check ps-0">
+                            <input type="checkbox" 
+                                id="typology-{{ $typology->id }}" 
+                                value="{{ $typology->id }}" 
+                                name="typologies[]"
+                                class="form-check-input" <!-- Aggiunto class form-check-input -->
+                                @if(in_array($typology->id, old('typologies', []))) checked @endif>
+                            <label class="form-check-label" for="typology-{{ $typology->id }}">
+                                {{ $typology->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+        @error('typologies') <!-- Modificato 'services' a 'typologies' -->
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+</div>
+
+
         <div class="row  mb-3">
             <div class="col-md-10 ">
               <label for="photo" class="form-label">Picture</label>

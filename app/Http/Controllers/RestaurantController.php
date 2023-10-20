@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use App\Models\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +41,8 @@ class RestaurantController extends Controller
     
         // Verifico se esiste già un ristorante associato all'utente loggato
         $existingRestaurant = Restaurant::where('user_id', $user_id)->first();
+        // Prendo tutte le tipologie 
+        $typologies = Typology::all();
     
         // Se esiste già un ristorante, redirect alla show
         if ($existingRestaurant) {
@@ -46,7 +50,7 @@ class RestaurantController extends Controller
         }
     
         // Se non esiste alcun ristorante, mostra il form per crearne uno nuovo
-        return view('admin.restaurants.create');
+        return view('admin.restaurants.create', compact('typologies'));
     }
 
     /**
@@ -71,7 +75,13 @@ class RestaurantController extends Controller
         $restaurant->user_id = $request->user()->id;
         $restaurant->fill($data);
         $restaurant->save();
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A new dish has been added successfully');
+
+          // Salva le tipologie associate al ristorante
+        if ($request->has('typologies')) {
+        $restaurant->typologies()->attach($request->typologies);
+        }
+        // return
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A Restaurant has been added successfully');
     }
 
     /**
@@ -82,7 +92,10 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+        $typologies = $restaurant->typologies; 
+        
+        return view('admin.restaurants.show', compact('restaurant', 'typologies'));
+
     }
 
     /**
@@ -93,7 +106,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit ', compact('restaurant'));
+        $typologies = Typology::all();
+        return view('admin.restaurants.edit ', compact('restaurant', 'typologies'));
     }
 
     /**
@@ -106,14 +120,24 @@ class RestaurantController extends Controller
     public function update(Request $request, Restaurant $restaurant)
     {
         $data = $this->validation($request->all());
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $img_path = Storage::disk('public')->put('uploads', $data['photo']);
             $data['photo'] = $img_path;
-        };
+        }
+    
         $restaurant->update($data);
+    
+        // Aggiorna le tipologie associate al ristorante
+        if ($request->has('typologies')) {
+            $restaurant->typologies()->sync($request->typologies);
+        } else {
+            // Se non ci sono tipologie selezionate, rimuovi tutte le tipologie associate
+            $restaurant->typologies()->detach();
+        }
+    
         return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'The restaurant has been edited successfully');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

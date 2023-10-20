@@ -1,1 +1,44 @@
-@import '~bootstrap/scss/bootstrap'
+
+@use './partials/welcome.scss';
+@use './common.scss';
+@use './variables.scss' as *;
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: $d-boo-background;
+    font-family: 'Open Sans', sans-serif;
+}
+.navbar {
+    height:90px;
+    .logo_laravel {
+        position:relative;
+        .moto {
+            width: 23px;
+            position: absolute;
+            bottom: 5px;
+            z-index: 1;
+            left: -1000%;
+            animation:goHome 3s ease 0.5s forwards; 
+        }
+        @keyframes goHome {
+            0% {
+                left:-1000%;
+                rotate: -80deg;
+            }
+            100% {
+                left:18px;
+                rotate: 0deg;
+            }
+        }
+    }
+}
+.nav-link {
+    color:$d-boo-orange;
+    &:hover{
+        color:$d-boo-light;
+    }
+@import '~bootstrap/scss/bootstrap';
+
+td{
+    height: 100px;
+}

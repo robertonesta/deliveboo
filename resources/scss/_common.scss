@@ -1,0 +1,15 @@
+@use './variables' as *;
+
+.bg_dark {
+    background-color: $d-boo-darker;
+}
+
+.color_orange{
+    color:$d-boo-orange !important;
+}
+.w-80{
+    width:80%;
+}
+.mb-7{
+    margin-bottom: 7rem;
+}

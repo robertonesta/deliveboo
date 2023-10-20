@@ -6,6 +6,7 @@ use App\Models\Dish;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class DishController extends Controller
@@ -40,10 +41,16 @@ class DishController extends Controller
     public function store(StoreDishRequest $request)
     {
         $val_data = $request->validated();
+        if($request->hasFile('photo')){
+            $img_path = Storage::disk('public')->put('uploads', $val_data['photo']);
+            $val_data['photo'] = $img_path;
+        };
         $slug = Dish::generateSlug($val_data['name']);
         $val_data['slug'] = $slug;
-        Dish::create($val_data);
-        return to_route('admin.dishes.index')->with('message', 'A new dish has been added successfully');
+        $dish = new Dish;
+        $dish->fill($val_data);
+        $dish->save();
+        return redirect()->route('admin.dishes.index', $dish)->with('message', 'Il nuovo piatto è stato aggiunto correttamente');
     }
 
     /**
@@ -79,9 +86,13 @@ class DishController extends Controller
     {
         $visible = $request->has('visible') ? 1 : 0;
         $val_data = $request ->validated();
+        if($request->hasFile('photo')){
+            $img_path = Storage::disk('public')->put('uploads', $val_data['photo']);
+            $val_data['photo'] = $img_path;
+        };
         $val_data['visible'] = $visible;
         $dish->update($val_data);
-        return to_route('admin.dishes.index')->with('message', 'The dish has been edited successfully');
+        return redirect()->route('admin.dishes.index', $dish)->with('message', 'Il nuovo piatto è stato modificato correttamente');
     }
 
     /**
@@ -93,6 +104,6 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
         $dish->delete();
-        return to_route('admin.dishes.index')->with('message', 'The dish has been deleted successfully');
+        return to_route('admin.dishes.index')->with('message', 'Il piatto è stato eliminato correttamente');
     }
 }

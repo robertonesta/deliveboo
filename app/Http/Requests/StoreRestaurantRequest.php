@@ -24,7 +24,28 @@ class StoreRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            "photo" => ['nullable', 'image'],
+            'photo' => 'image|required|mimes:jpg,png,jpeg,gif,svg',
+            'name' => 'required|max:60',
+            'address' => 'required|min:5',
+            'piva' => 'required|size:11'
+        ];
+    }
+
+    public function messages(){
+
+        return [
+        'name.required' => 'Name is required.',
+        'name.max' => 'The name must have a maximum of 60 characters.',
+
+        'address.required' => 'The address is required.',
+        'address.min' => 'The address must have a minimum of 5 characters.',
+
+        'photo.image' => 'Must be an image.',
+        'photo.required' => 'The photo is required.',
+        'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
+
+        'piva.required' => 'Vat is required',
+        'piva.size' => 'Vat must have 11 characters',
         ];
     }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use App\Models\Typology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +41,8 @@ class RestaurantController extends Controller
     
         // Verifico se esiste già un ristorante associato all'utente loggato
         $existingRestaurant = Restaurant::where('user_id', $user_id)->first();
+        // Prendo tutte le tipologie 
+        $typologies = Typology::all();
     
         // Se esiste già un ristorante, redirect alla show
         if ($existingRestaurant) {
@@ -46,7 +50,7 @@ class RestaurantController extends Controller
         }
     
         // Se non esiste alcun ristorante, mostra il form per crearne uno nuovo
-        return view('admin.restaurants.create');
+        return view('admin.restaurants.create', compact('typologies'));
     }
 
     /**
@@ -55,9 +59,9 @@ class RestaurantController extends Controller
      * @param  \App\Http\Requests\StoreRestaurantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRestaurantRequest $request)
     {
-        $data = $this->validation($request->all());
+        $data = $request->validated();
         if($request->hasFile('photo')){
             $img_path = Storage::disk('public')->put('uploads', $data['photo']);
             $data['photo'] = $img_path;
@@ -71,7 +75,15 @@ class RestaurantController extends Controller
         $restaurant->user_id = $request->user()->id;
         $restaurant->fill($data);
         $restaurant->save();
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A new dish has been added successfully');
+
+          // Salva le tipologie associate al ristorante
+        if ($request->has('typologies')) {
+        $restaurant->typologies()->attach($request->typologies);
+        }
+        // return
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'Il ristorante è stato aggiunto correttamente');
+
+        
     }
 
     /**
@@ -82,7 +94,10 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+        $typologies = $restaurant->typologies; 
+        
+        return view('admin.restaurants.show', compact('restaurant', 'typologies'));
+
     }
 
     /**
@@ -93,7 +108,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit ', compact('restaurant'));
+        $typologies = Typology::all();
+        return view('admin.restaurants.edit ', compact('restaurant', 'typologies'));
     }
 
     /**
@@ -103,17 +119,28 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        $data = $this->validation($request->all());
-        if($request->hasFile('photo')){
+        $data = $request->validated();
+        if ($request->hasFile('photo')) {
             $img_path = Storage::disk('public')->put('uploads', $data['photo']);
             $data['photo'] = $img_path;
-        };
+        }
+    
         $restaurant->update($data);
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'The restaurant has been edited successfully');
+    
+        // Aggiorna le tipologie associate al ristorante
+        if ($request->has('typologies')) {
+            $restaurant->typologies()->sync($request->typologies);
+        } else {
+            // Se non ci sono tipologie selezionate, rimuovi tutte le tipologie associate
+            $restaurant->typologies()->detach();
+        }
+    
+        return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'Il ristorante è stato modificato correttamente
+        ');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -128,37 +155,37 @@ class RestaurantController extends Controller
         
         
         $restaurant->delete();
-        return redirect()->route('admin.restaurants.index')->with('message', 'The restaurant has been deleted successfully');
+        return redirect()->route('admin.restaurants.index')->with('message', 'Il ristorante è stato eliminato correttamente');
     }
 
 
-    private function validation($data)
-    {
-        $validator = Validator::make(
-            $data,
-            [
-                'name' => 'required|max:60',
-                'address' => 'required|min:5',
-                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-                'piva' => 'required|size:11'
+    // private function validation($data)
+    // {
+    //     $validator = Validator::make(
+    //         $data,
+    //         [
+    //             'name' => 'required|max:60',
+    //             'address' => 'required|min:5',
+    //             'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+    //             'piva' => 'required|size:11'
               
-            ],
-            [
-                'name.required' => 'Name is required.',
-                'name.max' => 'The name must have a maximum of 60 characters.',
+    //         ],
+    //         [
+    //             'name.required' => 'Name is required.',
+    //             'name.max' => 'The name must have a maximum of 60 characters.',
             
-                'address.required' => 'The address is required.',
-                'address.min' => 'The address must have a minimum of 5 characters.',
+    //             'address.required' => 'The address is required.',
+    //             'address.min' => 'The address must have a minimum of 5 characters.',
 
-                'photo.image' => 'Must be an image.',
-                'photo.required' => 'The photo is required.',
-                'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
+    //             'photo.image' => 'Must be an image.',
+    //             'photo.required' => 'The photo is required.',
+    //             'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
 
-                'piva.required' => 'Vat is required',
-                'piva.size' => 'Vat must have 11 characters',
+    //             'piva.required' => 'Vat is required',
+    //             'piva.size' => 'Vat must have 11 characters',
 
-            ]
-        )->validate();
-        return $validator;
-    }
+    //         ]
+    //     )->validate();
+    //     return $validator;
+    // }
 }

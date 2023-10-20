@@ -59,9 +59,9 @@ class RestaurantController extends Controller
      * @param  \App\Http\Requests\StoreRestaurantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRestaurantRequest $request)
     {
-        $data = $this->validation($request->all());
+        $data = $request->validated();
         if($request->hasFile('photo')){
             $img_path = Storage::disk('public')->put('uploads', $data['photo']);
             $data['photo'] = $img_path;
@@ -82,6 +82,8 @@ class RestaurantController extends Controller
         }
         // return
         return redirect()->route('admin.restaurants.show', $restaurant)->with('message', 'A Restaurant has been added successfully');
+
+        
     }
 
     /**
@@ -117,9 +119,9 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        $data = $this->validation($request->all());
+        $data = $request->validated();
         if ($request->hasFile('photo')) {
             $img_path = Storage::disk('public')->put('uploads', $data['photo']);
             $data['photo'] = $img_path;
@@ -156,33 +158,33 @@ class RestaurantController extends Controller
     }
 
 
-    private function validation($data)
-    {
-        $validator = Validator::make(
-            $data,
-            [
-                'name' => 'required|max:60',
-                'address' => 'required|min:5',
-                'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-                'piva' => 'required|size:11'
+    // private function validation($data)
+    // {
+    //     $validator = Validator::make(
+    //         $data,
+    //         [
+    //             'name' => 'required|max:60',
+    //             'address' => 'required|min:5',
+    //             'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+    //             'piva' => 'required|size:11'
               
-            ],
-            [
-                'name.required' => 'Name is required.',
-                'name.max' => 'The name must have a maximum of 60 characters.',
+    //         ],
+    //         [
+    //             'name.required' => 'Name is required.',
+    //             'name.max' => 'The name must have a maximum of 60 characters.',
             
-                'address.required' => 'The address is required.',
-                'address.min' => 'The address must have a minimum of 5 characters.',
+    //             'address.required' => 'The address is required.',
+    //             'address.min' => 'The address must have a minimum of 5 characters.',
 
-                'photo.image' => 'Must be an image.',
-                'photo.required' => 'The photo is required.',
-                'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
+    //             'photo.image' => 'Must be an image.',
+    //             'photo.required' => 'The photo is required.',
+    //             'photo.mimes' => 'The image must be JPG, PNG, JPEG, GIF or SVG format.',
 
-                'piva.required' => 'Vat is required',
-                'piva.size' => 'Vat must have 11 characters',
+    //             'piva.required' => 'Vat is required',
+    //             'piva.size' => 'Vat must have 11 characters',
 
-            ]
-        )->validate();
-        return $validator;
-    }
+    //         ]
+    //     )->validate();
+    //     return $validator;
+    // }
 }

@@ -14,7 +14,7 @@
 
         <!-- Mostra le tipologie associate al ristorante -->
         <p class="card-text"><strong>Tipologie:</strong>
-            @if($restaurant->typologies)
+            @if($restaurant->typologies->count() > 0)
                 @foreach($restaurant->typologies as $typology)
                     {{ $typology->name }}
                     @if (!$loop->last)
@@ -25,6 +25,7 @@
                 Nessuna tipologia associata
             @endif
         </p>
+        
     </div>
 
     <div class="card-body">

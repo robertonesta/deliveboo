@@ -32,7 +32,7 @@
         <tr>
           <td scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
-          <td scope="row"><img width="100px" src="{{ asset('storage/' .$dish->photo)}}" alt=""></td>
+          <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$dish->photo)}}" alt=""></td>
           <td scope="row">{{$dish->description}}</td>
           <td scope="row">{{$dish->ingredients}}</td>
           <td scope="row">{{$dish->visible ? 'Disponibile' : 'Terminato'}}</td>

@@ -7,9 +7,9 @@
 @endif
 
 <div class="row justify-content-center align-items-center">
-    <div class="col-8 vh-100 p-3">
+    <div class="col-8  p-3">
         @if (Str::contains($restaurant->photo, 'upload'))
-        <img src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top h-100 fit-cover " alt="...">
+        <img src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top rounded w-100" alt="...">
     @else
         <img class="card-img-top rounded w-100" src="{{$restaurant->photo }}" alt="">
     @endif
@@ -18,7 +18,7 @@
         <div>
             <h2 class="fs-1 ">{{ $restaurant->name }}</h2>
         </div>
-        <div class="down">
+        <div>
             <div class="py-3">
                 <h4>Indirizzo</h4>
                 <p class="fst-italic">{{ $restaurant->address }}</p>

@@ -29,8 +29,8 @@
       </thead>
       <tbody class="text-center">
         @forelse ($dishes as $dish)
-        <tr>
-          <td scope="row">{{$dish->id}}</td>
+        <tr class="align-middle">
+          <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
           <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$dish->photo)}}" alt=""></td>
           <td scope="row">{{$dish->description}}</td>

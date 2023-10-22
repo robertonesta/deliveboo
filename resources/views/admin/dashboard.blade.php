@@ -3,29 +3,25 @@
 {{-- Mostro solo se esiste un ristorante --}}
 @if(count($restaurants) > 0)
     <table class="table table-striped table-dark">
-        <thead>
+        <thead class="text-center">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Indirizzo</th>
                 <th scope="col">Partita iva</th>
-                <th scope="col">Photo</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($restaurants as $restaurant)
-            <tr>
-                <th scope="row">{{ $restaurant->id }}</th>
-                <td scope="row">{{ $restaurant->name }}</td>
-                <td scope="row">{{ $restaurant->address }}</td>
-                <td scope="row">{{ $restaurant->piva }}</td>
-                <td scope="row">{{ $restaurant->photo }}</td>
+            <tr class="text-center align-middle">
+                <td  scope="row">{{ $restaurant->name }}</td>
+                <td  scope="row">{{ $restaurant->address }}</td>
+                <td  scope="row">{{ $restaurant->piva }}</td>
                 <td class="d-flex justify-content-center align-items-center"> 
-                    <a class="btn btn-primary text-decoration-none actions" href="{{ route('admin.restaurants.show', $restaurant) }}"> View </a>
-                    <a class="btn btn-warning text-decoration-none actions" href="{{ route('admin.restaurants.edit', $restaurant) }}"> Edit </a>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $restaurant->id }}">
-                        Delete              
+                    <a class="btn btn-primary text-decoration-none actions mx-1" href="{{ route('admin.restaurants.show', $restaurant) }}"><i class="fa-solid fa-eye"></i></a>
+                    <a class="btn btn-warning text-decoration-none actions mx-1" href="{{ route('admin.restaurants.edit', $restaurant) }}"><i class="fa-solid fa-pencil"></i></a>
+                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $restaurant->id }}">
+                        Delete           
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="delete-modal-{{ $restaurant->id }}" tabindex="-1" aria-labelledby="delete-modal-{{ $restaurant->id }}-label"

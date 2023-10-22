@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+@if (session('message'))
+<div class="alert alert-success" role="alert">
+    <strong>{{ session('message') }}</strong>
+</div>
+@endif
 
 <div class="row justify-content-center align-items-center">
     <div class="col-8 vh-100 p-3">

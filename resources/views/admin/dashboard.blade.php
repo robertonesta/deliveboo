@@ -20,9 +20,7 @@
                 <td class="d-flex justify-content-center align-items-center"> 
                     <a class="btn btn-primary text-decoration-none actions mx-1" href="{{ route('admin.restaurants.show', $restaurant) }}"><i class="fa-solid fa-eye"></i></a>
                     <a class="btn btn-warning text-decoration-none actions mx-1" href="{{ route('admin.restaurants.edit', $restaurant) }}"><i class="fa-solid fa-pencil"></i></a>
-                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $restaurant->id }}">
-                        Delete           
-                    </button>
+                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $restaurant->id }}"> <i class="fa-solid fa-trash-can"></i></button>
                     <!-- Modal -->
                     <div class="modal fade" id="delete-modal-{{ $restaurant->id }}" tabindex="-1" aria-labelledby="delete-modal-{{ $restaurant->id }}-label"
                     aria-hidden="true">

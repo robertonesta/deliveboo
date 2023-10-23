@@ -1,0 +1,77 @@
+@use '../variables.scss' as *;
+
+.login.register {
+    background-image: url('img/food.jpg');
+    height: calc(100vh - 90px);
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+
+    .card {
+        background: rgba(255, 255, 255, 0.34);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        input[placeholder] {
+            background: rgba(255, 255, 255, 0.39);
+            border: 3px solid $d-boo-orange;
+            color: $d-boo-black;
+            font-weight: 600;
+
+            &:focus,
+            &:active {
+                box-shadow: 0 0 0 0.25rem $d-boo-orange;
+            }
+        }
+
+        input[placeholder="Email address"]::placeholder,
+        input[placeholder="Password"]::placeholder {
+            color: $d-boo-black;
+        }
+
+        label[for="remember"] {
+            font-weight: 600;
+        }
+
+        input[name="remember"] {
+            background: rgba(255, 255, 255, 0.39);
+            width:20px;
+            height:20px;
+            border:3px solid $d-boo-orange;
+            &:checked {
+                background-color: $d-boo-orange !important;
+                border-color: $d-boo-orange !important;
+                background-image:url('https://api.iconify.design/jam:check.svg?color=%23222222');
+                background-position: center;
+                background-size: 25px;
+            }
+
+            &:focus {
+                border-color: $d-boo-orange-light;
+                box-shadow: 0 0 0 0.25rem $d-boo-orange;
+            }
+        }
+
+        button[type="submit"] {
+            background: -webkit-linear-gradient($d-boo-orange-light, $d-boo-dark, $d-boo-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            &:hover {
+                -webkit-text-fill-color: $d-boo-darker;
+            }
+        }
+        #forgot {
+            color: $d-boo-black;
+            font-weight: 600;
+            &:hover {
+                border-right:3px solid $d-boo-orange;
+                border-left:3px solid $d-boo-orange;
+            }
+        }
+    }
+}

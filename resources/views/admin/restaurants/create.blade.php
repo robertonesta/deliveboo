@@ -3,10 +3,10 @@
 
 <div>
     <h2 class="text-center fs-1">Inserisci i dettagli del tuo Ristorante</h2>
-    <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
         @csrf
 
-        <div class="col-md-10 mb-3">
+        <div class="col-md-12 mb-3">
             <label for="name" class="form-label">Nome</label>
             <input 
                 type="text" 
@@ -23,7 +23,7 @@
             @enderror
         </div>
 
-        <div class="col-md-10 mb-3">
+        <div class="col-md-12 mb-3">
             <label for="address" class="form-label">Indirizzo</label>
             <input 
                 type="text" 
@@ -40,7 +40,7 @@
             @enderror
         </div>
 
-        <div class="col-md-10 mb-3">
+        <div class="col-md-12 mb-3">
             <label for="piva" class="form-label">Partita iva</label>
             <input 
                 type="text" 
@@ -58,11 +58,11 @@
         </div>
 
         {{-- Aggiunta tipologia di ristorante --}}
-        <div class="col-md-10 mb-3">
+        <div class="col-md-12 mb-3">
             <div class="col-md-2">
                 <label class="form-label">Tipologia</label>
             </div>
-            <div class="col-md-10 ms-4">
+            <div class="col-md-12 ms-4">
                 <div class="row">
                     @php
                         $typologiesChunks = $typologies->chunk(ceil($typologies->count() / 4));
@@ -94,26 +94,61 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col-md-10">
-                <label for="photo" class="form-label">Foto</label>
+
+        {{-- <div class="row mb-3">
+            <div class="col-md-10" id="image-preview-container">
             </div>
-            <div class="col-md-10">
+        </div> --}}
+
+        <div class="row mb-3">
+            <div id="image" class="col-md-12">
+                <label for="photo" class="form-label">Foto</label>
                 <input type="file" 
-                    name="photo" 
-                    id="photo" 
-                    class="form-control @error('photo') is-invalid @enderror" 
+                       name="photo" 
+                       id="photo" 
+                       class="form-control @error('photo') is-invalid @enderror" 
                 />
                 @error('photo')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
+            <div class="col-md-5 rounded" id="image-preview-container">
+                
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Salva</button>
+        
+        
+        <div id="buttons" class="d-flex justify-content-center gap-3">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="submit" class="btn btn-success">Conferma</button>
+        </div>
     </form>
 </div>
+
+
+<script>
+    const photoInput = document.getElementById('photo');
+    photoInput.addEventListener('change', function() {
+        const file = photoInput.files[0];
+        const reader = new FileReader();
+        const previewContainer = document.getElementById('image-preview-container');
+        const resize = document.getElementById('image');
+
+        reader.onload = function(e) {
+            const imagePreview = document.createElement('img');
+            imagePreview.src = e.target.result;
+            imagePreview.className = 'card-img-top mb-3';
+            resize.className = 'col-md-7';
+            previewContainer.innerHTML = ''; // Pulisce il contenuto precedente se presente
+            previewContainer.appendChild(imagePreview);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 
 @endsection

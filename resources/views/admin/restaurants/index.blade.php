@@ -9,7 +9,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Indirizzo</th>
                 <th scope="col">Partita iva</th>
-                <th scope="col">Photo</th>
+            
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 <td>{{ $restaurant->name }}</td>
                 <td>{{ $restaurant->address }}</td>
                 <td>{{ $restaurant->piva }}</td>
-                <td>{{ $restaurant->photo }}</td>
+               
                 <td class="d-flex justify-content-between align-items-center"> 
                     <a class="btn btn-primary text-decoration-none actions" href="{{ route('admin.restaurants.show', $restaurant) }}">  <i class="fa-solid fa-circle-info"></i></a>
                     <a class="btn btn-warning text-decoration-none actions" href="{{ route('admin.restaurants.edit', $restaurant) }}"> <i class="fa-solid fa-pen"></i></a>

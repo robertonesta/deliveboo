@@ -24,7 +24,6 @@ class RestaurantController extends Controller
     $user = Auth::user(); 
     $user_id = $user->id; 
 
-    // Ora puoi usare $user_id nella tua query
     $restaurants = Restaurant::where('user_id', $user_id)->paginate(5);
     return view('admin.restaurants.index', compact('restaurants'));
     }

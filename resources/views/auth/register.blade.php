@@ -75,9 +75,9 @@
                             </div>
     
                             <div class="mb-4 row justify-content-center mb-0">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn fs-1">
-                                        {{ __('Register') }}
+                                <div class="col-md-6 text-center">
+                                    <button type="submit" class="btn fs-1 d-inline">
+                                        Registrati
                                     </button>
                                 </div>
                             </div>

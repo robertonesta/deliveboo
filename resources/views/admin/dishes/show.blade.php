@@ -4,10 +4,10 @@
 <div class="container p-5">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-8">
-            @if (Str::contains($dish->photo, 'photo'))
+            @if (Str::contains($dish->photo, 'upload'))
                 <img class="w-100" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
             @else
-                <img class="w-100" src="{{ asset('storage/' .$dish->photo)}}" alt="">
+                <img class="w-100" src="{{$dish->photo}}" alt="">
             @endif
         </div>
         <div class="col-4">

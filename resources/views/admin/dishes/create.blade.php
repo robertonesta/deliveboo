@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="fs-4 text-secondary my-4">Nuovo Piatto</h2>
    @include('partials.validation_error')
-    <form action="{{route('admin.dishes.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('admin.dishes.store')}}" autocomplete="off" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3 name">
             <label for="name" class="form-label">Nome</label>

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\API\RestaurantController;
+use App\Http\Controllers\API\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------

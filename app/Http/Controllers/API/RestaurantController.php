@@ -17,15 +17,28 @@ class RestaurantController extends Controller
 	    ]);
     }
 
-	public function typologiesSearch(Request $request ) {
-		$typologyId = '1'; 
+	// public function typologiesSearch(Request $request ) {
+	// 	$typologyId = '1'; 
 
-		$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
-    	$query->where('typology_id', $typologyId);
-		})
-		// ->join('typologies' , 'restaurants.id', '=', 'typologies.id')	// ->select('name')
-		->get();
+	// 	$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
+    // 	$query->where('typology_id', $typologyId);
+	// 	})
+	// 	// ->join('typologies' , 'restaurants.id', '=', 'typologies.id')	// ->select('name')
+	// 	->get();
 		
+	
+	// 	return response()->json([
+	// 		'success' => true,
+	// 		'restaurants' => $restaurants,
+	// 	]);
+	// }
+
+	public function typologiesSearch(Request $request) {
+		$typologyId = $request->input('typologyId'); // Leggi il valore da Vue.js
+	
+		$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
+			$query->where('typology_id', $typologyId);
+		})->get();
 	
 		return response()->json([
 			'success' => true,

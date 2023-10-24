@@ -16,4 +16,28 @@ class RestaurantController extends Controller
 		    'restaurants' => $restaurants,
 	    ]);
     }
+
+	public function typologiesSearch(Request $request ) {
+		$typologyId = '1'; 
+
+		$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
+    	$query->where('typology_id', $typologyId);
+		})
+		// ->join('typologies' , 'restaurants.id', '=', 'typologies.id')	// ->select('name')
+		->get();
+		
+	
+		return response()->json([
+			'success' => true,
+			'restaurants' => $restaurants,
+		]);
+	}
+	
 }
+
+
+
+// $restaurantType = DB::table('restaurants')
+//         ->join('typologies' , 'restaurants.id', '=', 'typologies.restaurant_id')
+//         ->select('restaurants.', 'typologies.')
+//         ->get();

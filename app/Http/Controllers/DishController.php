@@ -6,6 +6,7 @@ use App\Models\Dish;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -40,6 +41,7 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
+
         $val_data = $request->validated();
         if($request->hasFile('photo')){
             $img_path = Storage::disk('public')->put('uploads', $val_data['photo']);
@@ -47,6 +49,7 @@ class DishController extends Controller
         };
         $slug = Dish::generateSlug($val_data['name']);
         $val_data['slug'] = $slug;
+        $val_data['restaurant_id'] = Auth::id();
         $dish = new Dish;
         $dish->fill($val_data);
         $dish->save();

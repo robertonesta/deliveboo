@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('restaurants', [RestaurantController::class, 'typologiesSearch']);
+Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('typologies', [TypologiesController::class, 'index']);
 Route::post('/searchRestaurants', [RestaurantController::class, 'typologiesSearch']);

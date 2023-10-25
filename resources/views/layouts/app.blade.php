@@ -28,10 +28,13 @@
         <nav class="navbar navbar-expand-md navbar-light bg_dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
-                    <div class="logo_laravel w-25">
-                        <img src="{{asset('/img/deliveboo-logo.png')}}" alt="" class="img-fluid">
-                        <img src="{{asset('/img/moto.png')}}" alt="" class="moto">
-                    </div>
+                    <a href="http://localhost:5174/">
+                        <div class="logo_laravel w-25">
+
+                            <img src="{{asset('/img/deliveboo-logo.png')}}" alt="" class="img-fluid">
+                            <img src="{{asset('/img/moto.png')}}" alt="" class="moto">
+                        </div>
+                    </a>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
 

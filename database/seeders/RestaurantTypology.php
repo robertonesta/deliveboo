@@ -34,7 +34,7 @@ class RestaurantTypology extends Seeder
             ],
             4 => [
                 'restaurant_id' => 2,
-                'typology_id' => 13,
+                'typology_id' => 2,
             ],
             5 => [
                 'restaurant_id' => 2,

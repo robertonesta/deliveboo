@@ -24,3 +24,4 @@ Route::get('restaurants', [RestaurantController::class, 'typologiesSearch']);
 Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('typologies', [TypologiesController::class, 'index']);
 Route::post('/searchRestaurants', [RestaurantController::class, 'typologiesSearch']);
+Route::get('/restaurants/{slug}', [RestaurantController::class, 'show']);

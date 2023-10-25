@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('dishes', function (Blueprint $table) {
             $table->foreignId('restaurant_id')
-            ->afterId('id')->nullable()->nullOnDelete();
+            ->afterId('id')->constrained()->cascadeOnDelete();
         });
     }
 

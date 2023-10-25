@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Restaurant;
+
+use App\Models\Typology;
 
 
 class DishController extends Controller
@@ -19,8 +22,13 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::orderByDesc('id')->get();
-        return view('admin.dishes.index', compact('dishes'));
+        $user_id = Auth::id();
+        if (Dish::where('restaurant_id', $user_id)->count() > 0) {
+            $dishes = Dish::where('restaurant_id', $user_id)->orderByDesc('id')->get();
+            return view('admin.dishes.index', compact('dishes'));
+        } else {
+            return to_route('admin.dishes.create');
+        };
     }
 
     /**
@@ -30,7 +38,18 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dishes.create');
+        $user = Auth::user();
+        $user_id = $user->id;
+
+        // Verifico se esiste già un ristorante associato all'utente loggato
+        $existingRestaurant = Restaurant::where('user_id', $user_id)->first();
+        // Se esiste già un ristorante, redirect alla show
+        if ($existingRestaurant) {
+            return view('admin.dishes.create');
+        }
+
+        // Se non esiste alcun ristorante, mostra il form per crearne uno nuovo
+        return to_route('admin.dashboard')->with('message', 'Crea prima il tuo ristorante!');
     }
 
     /**
@@ -43,7 +62,7 @@ class DishController extends Controller
     {
 
         $val_data = $request->validated();
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $img_path = Storage::disk('public')->put('uploads', $val_data['photo']);
             $val_data['photo'] = $img_path;
         };
@@ -88,8 +107,8 @@ class DishController extends Controller
     public function update(UpdateDishRequest $request, Dish $dish)
     {
         $visible = $request->has('visible') ? 1 : 0;
-        $val_data = $request ->validated();
-        if($request->hasFile('photo')){
+        $val_data = $request->validated();
+        if ($request->hasFile('photo')) {
             $img_path = Storage::disk('public')->put('uploads', $val_data['photo']);
             $val_data['photo'] = $img_path;
         };

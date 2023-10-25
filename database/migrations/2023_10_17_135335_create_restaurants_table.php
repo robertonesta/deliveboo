@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('address');
-            $table->bigInteger('piva');
+            $table->string('piva');
             $table->text('photo');
             $table->timestamps();
         });

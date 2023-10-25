@@ -21,7 +21,7 @@ return [
         "name" => "Panificio SANNA dal 1976",
         "address" => "Via Marghera 37, Milano, 20149" ,
         "piva" => "03061930821",
-        "photo" => "https://sannamilano.it/wp-content/uploads/2022/08/Unknown.jpg"
+        "photo" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ngy69egana65owuc6Vi6uQURSn3p-MBhXg&usqp=CAU"
     ],
     [
         "user_id"=> 4,

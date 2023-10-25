@@ -48,7 +48,7 @@ class RestaurantController extends Controller
 	
 
     public function show($slug){
-        $restaurant = Restaurant::with('dish')->where('slug', $slug)->first();
+        $restaurant = Restaurant::with('dishes', 'typologies')->where('slug', $slug)->first();
 
         if ($restaurant) {
             return response()->json([

@@ -146,16 +146,23 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
-    {
-                // Delete image from storage
-                if($restaurant->photo) Storage::delete($restaurant->photo);
-                $restaurant->save();
-        
-        
-        $restaurant->delete();
-        return redirect()->route('admin.restaurants.index')->with('message', 'Il ristorante è stato eliminato correttamente');
+ public function destroy(Restaurant $restaurant)
+{
+    // Ottieni il percorso completo dell'immagine nello storage
+    $imagePath = storage_path('app/public/' . $restaurant->photo);
+
+    // Verifica se l'immagine esiste nello storage prima di tentare di eliminarla
+    if (Storage::exists($imagePath)) {
+        // Elimina l'immagine dallo storage
+        Storage::delete($imagePath);
     }
+
+    // Elimina il ristorante dal database
+    $restaurant->delete();
+
+    // Redirect con un messaggio di conferma
+    return redirect()->route('admin.restaurants.index')->with('message', 'Il ristorante è stato eliminato correttamente');
+}
 
 
     // private function validation($data)

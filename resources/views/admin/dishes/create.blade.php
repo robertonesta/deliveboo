@@ -61,7 +61,7 @@
             Disponibile
           </label>
         </div>
-        <div id="buttons" class="d-flex justify-content-center gap-3">
+        <div id="buttons" class="d-flex justify-content-center gap-3 my-5">
             <button type="reset" class="btn btn-secondary">Reset</button>
             <button type="submit" class="btn btn-success">Conferma</button>
         </div>

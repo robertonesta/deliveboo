@@ -94,7 +94,7 @@
         </div>
         <div class="row mb-3 align-items-center">
             <div class="col-md-12">
-                <label for="photo" class="form-label">Foto</label>
+                <label for="photo" class="form-label">Immagine</label>
             </div>
             <div class="col-md-7">
                 <input type="file" name="photo" id="photo" value="{{ old('photo', $restaurant->photo) }}" class="form-control @error('photo') is-invalid @enderror" />

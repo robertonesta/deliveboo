@@ -13,6 +13,7 @@
             <span>Aggiungi un nuovo piatto</span>
         </a>
     </div>
+    @forelse ($dishes as $dish)
     <div class="table-responsive">
         <table class="table table-striped table-dark">
       <thead class="text-center">
@@ -28,7 +29,6 @@
         </tr>
       </thead>
       <tbody class="text-center">
-        @forelse ($dishes as $dish)
         <tr class="align-middle">
           <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>

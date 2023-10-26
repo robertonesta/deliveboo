@@ -12,9 +12,6 @@
           <input type="text" name="name" id="name" class="form-control" placeholder="Modifica il nome del piatto" value="{{old('name', $dish->name)}}" aria-describedby="helpId">
         </div>
 
-
-
-
         <div class="row mb-3 align-items-center">
           <div class="col-md-12">
               <label for="photo" class="form-label">Foto</label>

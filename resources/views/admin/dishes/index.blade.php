@@ -2,16 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">Piatti</h2>
+    <h2 class="fs-4 text-secondary my-4">Menù</h2>
     @if (session('message'))
         <div class="alert alert-success" role="alert">
             <strong>{{ session('message') }}</strong>
         </div>
     @endif
 
-
-    
-    
     <div class="d-flex justify-content-center">
         <a href="{{route('admin.dishes.create')}}" class="my-3 btn btn-primary text-decoration-none actions">
             <span>Aggiungi un nuovo piatto</span>
@@ -84,19 +81,19 @@
                             </div>
                         </div>
                         <!-- /Modal -->
-                    </td>
+            </td>
         </tr>
-       
-            
+
+
         @empty
         <tr>Nessun piatto registrato!</tr>
         @endforelse
       </tbody>
         </table>
-        
+
     </div>
-  
-   
+
+
 @endif
 </div>
 @endsection

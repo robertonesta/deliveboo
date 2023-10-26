@@ -6,8 +6,8 @@
 </div>
 @endif
 
-<div class="row justify-content-center align-items-center">
-    <div class="col-8  p-3">
+<div class="row justify-content-center align-items-center mt-3">
+    <div class="col-8 p-3">
         @if (Str::contains($restaurant->photo, 'upload'))
         <img src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top rounded w-100" alt="...">
     @else
@@ -42,6 +42,38 @@
             @endif
         </p>
             </div>
+        </div>
+        <div id="azioni"> 
+                    <a class="btn btn-warning text-decoration-none actions" href="{{ route('admin.restaurants.edit', $restaurant) }}"> <i class="fa-solid fa-pen"></i> Modifica</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $restaurant->id }}"><i class="fa-solid fa-trash"></i> Elimina          
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="delete-modal-{{ $restaurant->id }}" tabindex="-1" aria-labelledby="delete-modal-{{ $restaurant->id }}-label"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="delete-modal-{{ $restaurant->id }}-label">Conferma eliminazione</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start text-dark">
+                    Sei sicuro di voler eliminare il ristorante {{ $restaurant->name }} con ID
+                    {{ $restaurant->id }}? <br>
+                    L'operazione non è reversibile
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+
+                    <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="">
+                        @method('DELETE')
+                        @csrf
+                        
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
+                </div>
+            </div>
+                </div>
+            </div>            
         </div>
     </div>
 </div>

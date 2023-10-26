@@ -6,6 +6,7 @@
     <thead class="text-center">
         <tr>
             <th scope="col">Nome</th>
+            <th scope="col">Immagine</th>
             <th scope="col">Indirizzo</th>
             <th scope="col">Partita iva</th>
             <th scope="col">Actions</th>
@@ -15,6 +16,7 @@
         @foreach ($restaurants as $restaurant)
         <tr class="text-center align-middle">
             <td scope="row">{{ $restaurant->name }}</td>
+            <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$restaurant->photo)}}" alt=""></td>
             <td scope="row">{{ $restaurant->address }}</td>
             <td scope="row">{{ $restaurant->piva }}</td>
             <td class="d-flex justify-content-center align-items-center">

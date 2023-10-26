@@ -92,7 +92,7 @@
                 @enderror
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3 align-items-center">
             <div class="col-md-12">
                 <label for="photo" class="form-label">Foto</label>
             </div>
@@ -104,7 +104,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-md-5 ">
+            <div class="col-md-5">
                 @if (Str::contains($restaurant->photo, 'photo'))
                     <img src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top " alt="...">
                 @else

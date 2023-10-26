@@ -82,7 +82,7 @@
                     </td>
         </tr>
         @empty
-        <tr>No dishes registered.</tr>
+        <tr>Nessun piatto registrato.</tr>
         @endforelse
       </tbody>
         </table>

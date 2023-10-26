@@ -22,13 +22,19 @@ class DishController extends Controller
      */
     public function index()
     {
+        //user loggato
         $user_id = Auth::id();
-        if (Dish::where('restaurant_id', $user_id)->count() > 0) {
-            $dishes = Dish::where('restaurant_id', $user_id)->orderByDesc('id')->get();
+        //ristorant associato all'user loggato
+        $restaurant = Restaurant::where('user_id', $user_id)->first();
+        if($restaurant){
+            //get restaurant id
+            $restaurantId = $restaurant->id;
+            $dishes = Dish::where('restaurant_id', $restaurantId)->orderByDesc('id')->get();
             return view('admin.dishes.index', compact('dishes'));
         } else {
             return to_route('admin.dishes.create');
-        };
+        }
+        
     }
 
     /**
@@ -68,7 +74,12 @@ class DishController extends Controller
         };
         $slug = Dish::generateSlug($val_data['name']);
         $val_data['slug'] = $slug;
-        $val_data['restaurant_id'] = Auth::id();
+        $user_id = Auth::id();
+        $restaurant = Restaurant::where('user_id', $user_id)->first();
+        if($restaurant){
+            $restaurantId = $restaurant->id;
+        }
+        $val_data['restaurant_id'] = $restaurantId;
         $dish = new Dish;
         $dish->fill($val_data);
         $dish->save();

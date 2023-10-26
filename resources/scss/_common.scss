@@ -13,3 +13,9 @@
 .mb-7{
     margin-bottom: 7rem;
 }
+
+#restaurant_img, #dish_img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}

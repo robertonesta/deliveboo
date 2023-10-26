@@ -36,8 +36,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-start text-dark">
-                    Sei sicuro di voler eliminare il ristorante {{ $restaurant->name }} con ID
-                    {{ $restaurant->id }}? <br>
+                    Sei sicuro di voler eliminare il tuo ristorante <strong>{{ $restaurant->name }}</strong>?<br>
                     L'operazione non è reversibile
                 </div>
                 <div class="modal-footer">

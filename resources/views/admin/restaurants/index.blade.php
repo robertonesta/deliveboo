@@ -7,9 +7,9 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Immagine</th>
                 <th scope="col">Indirizzo</th>
-                <th scope="col">Partita iva</th>
-            
+                <th scope="col">Partita iva</th>        
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -18,6 +18,7 @@
             <tr>
                 <th scope="row">{{ $restaurant->id }}</th>
                 <td>{{ $restaurant->name }}</td>
+                <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$restaurant->photo)}}" alt=""></td>
                 <td>{{ $restaurant->address }}</td>
                 <td>{{ $restaurant->piva }}</td>
                

@@ -141,7 +141,7 @@
             imagePreview.src = e.target.result;
             imagePreview.className = 'card-img-top mb-3';
             resize.className = 'col-md-7';
-            previewContainer.innerHTML = ''; // Pulisce il contenuto precedente se presente
+            previewContainer.innerHTML = ''; 
             previewContainer.appendChild(imagePreview);
         };
 

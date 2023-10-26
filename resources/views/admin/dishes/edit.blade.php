@@ -4,24 +4,40 @@
 <div class="container">
 <h2 class="fs-4 text-secondary my-4">Modifica il piatto</h2>
     @include('partials.validation_error')
-    <form class="bg-white card p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
+    <form class=" card p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">
           <label for="name" class="form-label">Nome</label>
           <input type="text" name="name" id="name" class="form-control" placeholder="Modifica il nome del piatto" value="{{old('name', $dish->name)}}" aria-describedby="helpId">
         </div>
-        <div class="mb-3 photo">
-          <label for="photo" class="form-label">Immagine</label>
-          <div class="d-flex justify-content-between align-items-center">
-              @if (Str::contains($dish->photo, 'photo'))
-                        <img src=" {{ asset('storage/' .$dish->photo)}}" class="w-25" alt="...">
-                        @else
-                        <img class="w-25" src="{{ asset('storage/' .$dish->photo)}}" alt="">
-                        @endif
-            <input type="file" name="photo" id="photo" placeholder="Cambia immagine" value="{{old('photo', $dish->photo)}}" aria-describedby="helpId" class="form-control @error('photo') is-invalid @enderror"/>
+
+
+
+
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-12">
+              <label for="photo" class="form-label">Foto</label>
           </div>
-        </div>
+          <div class="col-md-7">
+              <input type="file" name="photo" id="photo" value="{{ old('photo', $dish->photo) }}" class="form-control @error('photo') is-invalid @enderror" />
+              @error('photo')
+                  <div class="invalid-feedback">
+                      {{ $message }}
+                  </div>
+              @enderror
+          </div>
+          <div class="col-md-5 ">
+              @if (Str::contains($dish->photo, 'photo'))
+                  <img src="{{ asset('storage/' . $dish->photo) }}" class="card-img-top " alt="...">
+              @else
+                  <img class="card-img-top rounded  mb-3" src="{{ asset('storage/' . $dish->photo) }}" alt="">
+              @endif
+          </div>
+      </div>
+
+
+
         <div class="mb-3">
           <label for="description" class="form-label">Descrizione</label>
           <textarea type="text" name="description" id="description" class="w-100 form-control" rows="5" value="{{old('description', $dish->description)}}"  placeholder="Modifica la descrizione del piatto">{{old('description', $dish->description)}}</textarea>
@@ -46,4 +62,22 @@
         </div>
     </form>
 </div>
+
+<script>
+  const photoInput = document.getElementById('photo');
+  const imagePreview = document.querySelector('.card-img-top');
+
+  photoInput.addEventListener('change', function() {
+      const file = photoInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+      };
+
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+  });
+</script>
 @endsection

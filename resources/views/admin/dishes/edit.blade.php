@@ -4,7 +4,7 @@
 <div class="container">
 <h2 class="fs-4 text-secondary my-4">Modifica il piatto</h2>
     @include('partials.validation_error')
-    <form class=" card p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
+    <form class="p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">
@@ -53,7 +53,7 @@
               Disponibile
           </label>
         </div>
-        <div class="d-flex justify-content-center align-items-center gap-3">
+        <div class="d-flex justify-content-center align-items-center gap-3 my-5">
             <button type="reset" class="btn btn-secondary">Reset</button>
             <button type="submit" class="btn btn-success">Conferma</button>
         </div>

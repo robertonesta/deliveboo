@@ -8,12 +8,17 @@
             <strong>{{ session('message') }}</strong>
         </div>
     @endif
+
+
+    
+    
     <div class="d-flex justify-content-center">
         <a href="{{route('admin.dishes.create')}}" class="my-3 btn btn-primary text-decoration-none actions">
             <span>Aggiungi un nuovo piatto</span>
         </a>
     </div>
     @forelse ($dishes as $dish)
+    @if($dishes->count() > 0)
     <div class="table-responsive">
         <table class="table table-striped table-dark">
       <thead class="text-center">
@@ -81,11 +86,18 @@
                         <!-- /Modal -->
                     </td>
         </tr>
+       
+            
+    
         @empty
         <tr>Nessun piatto registrato.</tr>
         @endforelse
       </tbody>
         </table>
+        
     </div>
+    @else
+    <p>Nessun piatto registrato.</p>
+@endif
 </div>
 @endsection

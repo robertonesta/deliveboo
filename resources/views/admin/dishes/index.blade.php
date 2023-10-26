@@ -88,7 +88,6 @@
         </tr>
        
             
-    
         @empty
         <tr>No dishes registered.</tr>
         @endforelse

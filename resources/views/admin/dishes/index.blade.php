@@ -17,7 +17,6 @@
             <span>Aggiungi un nuovo piatto</span>
         </a>
     </div>
-    @forelse ($dishes as $dish)
     @if($dishes->count() > 0)
     <div class="table-responsive">
         <table class="table table-striped table-dark">
@@ -34,6 +33,7 @@
         </tr>
       </thead>
       <tbody class="text-center">
+        @forelse ($dishes as $dish)
         <tr class="align-middle">
           <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
@@ -88,16 +88,15 @@
         </tr>
        
             
-    
         @empty
-        <tr>Nessun piatto registrato.</tr>
+        <tr>Nessun piatto registrato!</tr>
         @endforelse
       </tbody>
         </table>
         
     </div>
-    @else
-    <p>Nessun piatto registrato.</p>
+  
+   
 @endif
 </div>
 @endsection

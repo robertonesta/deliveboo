@@ -58,12 +58,12 @@
                                     {{__('Dashboard')}}
                                 </a>
                                 <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.restaurants.show' ? 'bg-primary' : ''}}" aria-current="page" href="{{route('admin.restaurants.create')}}">
-                                    <i class="fa-regular fa-chart-bar"></i>
-                                    {{__('Restaurant')}}
+                                    <i class="fa-solid fa-utensils"></i>
+                                    {{__('Ristorante')}}
                                 </a>
                                 <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dishes.index' ? 'bg-primary' : ''}}" aria-current="page" href="{{route('admin.dishes.index')}}">
-                                    <i class="fa-regular fa-chart-bar"></i>
-                                    {{__('Dishes')}}
+                                    <i class="fa-solid fa-book-open"></i>
+                                    {{__('Menù')}}
                                 </a>
                             </li>
                         </ul>

@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
-<div>
-    <h2 class="text-center fs-1">Inserisci i dettagli del tuo Ristorante</h2>
+<div class="container">
+    <h2 class="fs-4 text-secondary my-4">Nuovo Ristorante</h2>
     <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
         @csrf
 
@@ -21,6 +21,24 @@
                     {{ $message }}
                 </div>
             @enderror
+        </div>
+
+        <div class="row mb-3 d-flex justify-content-center align-items-center">
+            <div id="image" class="col-md-12">
+                <label for="photo" class="form-label">Foto</label>
+                <input type="file" 
+                       name="photo" 
+                       id="photo" 
+                       class="form-control @error('photo') is-invalid @enderror" 
+                />
+                @error('photo')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="col-md-5 rounded" id="image-preview-container">  
+            </div>
         </div>
 
         <div class="col-md-12 mb-3">
@@ -100,24 +118,6 @@
             </div>
         </div> --}}
 
-        <div class="row mb-3">
-            <div id="image" class="col-md-12">
-                <label for="photo" class="form-label">Foto</label>
-                <input type="file" 
-                       name="photo" 
-                       id="photo" 
-                       class="form-control @error('photo') is-invalid @enderror" 
-                />
-                @error('photo')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="col-md-5 rounded" id="image-preview-container">
-                
-            </div>
-        </div>
         
         
         <div id="buttons" class="d-flex justify-content-center gap-3">
@@ -139,7 +139,7 @@
         reader.onload = function(e) {
             const imagePreview = document.createElement('img');
             imagePreview.src = e.target.result;
-            imagePreview.className = 'card-img-top mb-3';
+            imagePreview.className = 'rounded card-img-top mb-3';
             resize.className = 'col-md-7';
             previewContainer.innerHTML = ''; 
             previewContainer.appendChild(imagePreview);

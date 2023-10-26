@@ -21,7 +21,6 @@
                 <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$restaurant->photo)}}" alt=""></td>
                 <td>{{ $restaurant->address }}</td>
                 <td>{{ $restaurant->piva }}</td>
-               
                 <td class="d-flex justify-content-between align-items-center"> 
                     <a class="btn btn-primary text-decoration-none actions" href="{{ route('admin.restaurants.show', $restaurant) }}">  <i class="fa-solid fa-circle-info"></i></a>
                     <a class="btn btn-warning text-decoration-none actions" href="{{ route('admin.restaurants.edit', $restaurant) }}"> <i class="fa-solid fa-pen"></i></a>

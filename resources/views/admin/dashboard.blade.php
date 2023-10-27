@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+<div class="container">
+<h2 class="fs-4 my-4">Dashboard</h2>
 {{-- Mostro solo se esiste un ristorante --}}
 @if(count($restaurants) > 0)
-<table class="table table-striped table-dark">
+<table class="table table-striped">
     <thead class="text-center">
         <tr>
             <th scope="col">Nome</th>
@@ -38,6 +40,7 @@
 {{ $restaurants->links('pagination::bootstrap-5') }}
 
 <!-- Altri dati del ristorante -->
+</div>
 
 
 @endsection

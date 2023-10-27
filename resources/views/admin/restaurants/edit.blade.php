@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">Modifica il tuo Ristorante</h2>
+    <h2 class="fs-4 my-4">Modifica il tuo Ristorante</h2>
     @include('partials.validation_error')
     <form action="{{ route('admin.restaurants.update', $restaurant) }}" method="POST" enctype="multipart/form-data" class="mb-3">
         @method('PUT') 

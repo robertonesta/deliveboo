@@ -2,7 +2,7 @@
 @section('content')
 {{-- Mostro solo se esiste un ristorante --}}
 @if(count($restaurants) > 0)
-    <table class="table table-striped table-dark">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">ID</th>

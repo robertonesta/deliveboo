@@ -6,6 +6,7 @@
 </div>
 @endif
 <div class="container">
+    <h2 class="fs-4 my-4">Ristorante</h2>
     <div class="row justify-content-center align-items-center mt-3">
         <div class="col-7 p-3">
             @if (Str::contains($restaurant->photo, 'upload'))
@@ -16,7 +17,7 @@
         </div>
         <div class="col-5 p-3">
             <div>
-                <h2 class="fs-1 ">{{ $restaurant->name }}</h2>
+                <h2 class="fs-1 fw-bold pb-4">{{ $restaurant->name }}</h2>
             </div>
             <div>
                 <div class="py-3">

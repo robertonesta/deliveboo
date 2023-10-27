@@ -26,17 +26,16 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
+        <nav class="navbar sticky-top flex-md-nowrap p-3 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 mr-0" href="#">Deliveboo</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="dropdown open">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
-                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{('Home')}}</a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                         {{ ('Logout') }}
@@ -49,19 +48,19 @@
         </nav>
         <div class="container-fluid vh-100">
             <div class="row h-100">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse px-0">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse px-0 shadow">
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dashboard' ? 'bg-primary' : ''}}" aria-current="page" href="{{route('admin.dashboard')}}">
+                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dashboard' ? 'bg-orange' : ''}}" aria-current="page" href="{{route('admin.dashboard')}}">
                                     <i class="fa-regular fa-chart-bar"></i>
                                     {{__('Dashboard')}}
                                 </a>
-                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.restaurants.show' ? 'bg-primary' : ''}}" aria-current="page" href="{{route('admin.restaurants.create')}}">
+                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.restaurants.show' ? 'bg-orange' : ''}}" aria-current="page" href="{{route('admin.restaurants.create')}}">
                                     <i class="fa-solid fa-utensils"></i>
                                     {{__('Ristorante')}}
                                 </a>
-                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dishes.index' ? 'bg-primary' : ''}}" aria-current="page" href="{{route('admin.dishes.index')}}">
+                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.dishes.index' ? 'bg-orange' : ''}}" aria-current="page" href="{{route('admin.dishes.index')}}">
                                     <i class="fa-solid fa-book-open"></i>
                                     {{__('Menù')}}
                                 </a>
@@ -69,7 +68,7 @@
                         </ul>
                     </div>
                 </nav>
-                <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 bg-dark text-white">
+                <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     @yield('content')
                 </main>
             </div>

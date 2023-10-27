@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-<h2 class="fs-4 text-secondary my-4">Modifica il piatto</h2>
+<h2 class="fs-4 my-4">Modifica il piatto</h2>
     @include('partials.validation_error')
-    <form class="p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
+    <form class="py-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">

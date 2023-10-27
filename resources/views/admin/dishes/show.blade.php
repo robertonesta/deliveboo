@@ -12,7 +12,7 @@
         </div>
         <div class="col-5">
             <div>
-                <h2 class="fs-1 fw-bold text-white pb-4">{{$dish->name}}</h2>
+                <h2 class="fs-1 fw-bold pb-4">{{$dish->name}}</h2>
             </div>
             <div>
                 <div class="fs-6 py-3">

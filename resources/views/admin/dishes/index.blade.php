@@ -34,10 +34,10 @@
         <tr class="align-middle">
           <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
-          <td scope="row">   @if (Str::contains($dish->photo, 'https'))
-            <img class="w-100 fit-contain max-h80 rounded" src="{{$dish->photo}}" alt="">
+          <td scope="row">   @if (Str::contains($dish->photo, 'http'))
+            <img class="w-100 object-fit-cover max-h80 rounded" src="{{$dish->photo}}" alt="">
         @else
-            <img class="w-100 fit-contain max-h80 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
+            <img class="w-100 object-fit-cover max-h80 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
         @endif</td>
           <td scope="row">{{ Str::limit($dish->description, 50) }}</td>
           <td scope="row">{{ Str::limit($dish->ingredients, 50) }}</td>

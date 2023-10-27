@@ -57,3 +57,9 @@ td{
 .bg-orange{
     background-color: $d-boo-orange;
 }
+
+#restaurant_img, #dish_img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}

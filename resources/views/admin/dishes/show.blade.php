@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-7 p-3">
-            @if (Str::contains($dish->photo, 'https'))
+            @if (Str::contains($dish->photo, 'http'))
             <img id="dish_img" class="rounded" src="{{$dish->photo}}" alt="">
         @else
             <img id="dish_img" class="rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">

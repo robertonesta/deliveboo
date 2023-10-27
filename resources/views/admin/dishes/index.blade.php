@@ -37,13 +37,17 @@
         <tr class="align-middle">
           <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
-          <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$dish->photo)}}" alt=""></td>
-          <td scope="row">{{$dish->description}}</td>
-          <td scope="row">{{$dish->ingredients}}</td>
+          <td scope="row">   @if (Str::contains($dish->photo, 'https'))
+            <img class="w-100 fit-contain max-h80 rounded" src="{{$dish->photo}}" alt="">
+        @else
+            <img class="w-100 fit-contain max-h80 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
+        @endif</td>
+          <td scope="row">{{ Str::limit($dish->description, 50) }}</td>
+          <td scope="row">{{ Str::limit($dish->ingredients, 50) }}</td>
           <td scope="row">{{$dish->visible ? 'Disponibile' : 'Terminato'}}</td>
           <td scope="row">€{{$dish->price}}</td>
           <td class="d-flex align-items-center justify-content-center">
-                        <a href="{{route('admin.dishes.show', $dish)}}"
+            <a href="{{route('admin.dishes.show', $dish)}}"
                             class="btn btn-primary text-decoration-none actions">
                             <span><i class="fa-solid fa-eye"></i></span>
                         </a>

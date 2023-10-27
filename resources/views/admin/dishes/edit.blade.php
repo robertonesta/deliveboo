@@ -28,10 +28,10 @@
               @enderror
           </div>
           <div class="col-md-5 ">
-              @if (Str::contains($dish->photo, 'photo'))
+              @if (Str::contains($dish->photo, 'upload'))
                   <img src="{{ asset('storage/' . $dish->photo) }}" class="card-img-top " alt="...">
               @else
-                  <img class="card-img-top rounded  mb-3" src="{{ asset('storage/' . $dish->photo) }}" alt="">
+                  <img class="card-img-top rounded  mb-3" src="{{  $dish->photo }}" alt="">
               @endif
           </div>
       </div>

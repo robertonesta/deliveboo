@@ -18,7 +18,7 @@
     
                             <div class="mb-4 row justify-content-center">
                                 <div class="col-md-6">
-                                    <input placeholder="Name" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input placeholder="Nome" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
     
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                             <div class="mb-4 row justify-content-center">
   
                                 <div class="col-md-6">
-                                    <input placeholder="Lastname" id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
+                                    <input placeholder="Cognome" id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
     
                                     @error('lastname')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                             <div class="mb-4 row justify-content-center">
     
                                 <div class="col-md-6">
-                                    <input placeholder="Confirm password" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input placeholder="Conferma password" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
     

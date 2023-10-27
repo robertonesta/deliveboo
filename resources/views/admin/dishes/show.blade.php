@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container p-5">
+<div class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-8">
             @if (Str::contains($dish->photo, 'https'))
@@ -10,9 +10,9 @@
             <img class="w-100 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
         @endif
         </div>
-        <div class="col-4">
+        <div class="col-5">
             <div>
-                <h2 class="fs-1 fw-bold text-white pb-4">{{$dish->name}}</h2>
+                <h2 class="fs-1 fw-bold pb-4">{{$dish->name}}</h2>
             </div>
             <div>
                 <div class="fs-6 py-3">
@@ -27,6 +27,45 @@
                     <h4>Prezzo</h4>
                     <p class="fst-italic">€{{$dish->price}}</p>
                 </div>
+                <div id="azioni">
+                        <a href="{{route('admin.dishes.edit', $dish)}}"
+                            class="mx-1 btn btn-warning text-decoration-none actions">
+                            <span><i class="fa-solid fa-pencil"></i> Modifica</span>
+                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger actions" data-bs-toggle="modal"
+                            data-bs-target="#modal{{$dish->slug}}">
+                            <i class="fa-solid fa-trash-can"></i> Elimina
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal{{$dish->slug}}" tabindex="-1"
+                            aria-labelledby="modalTitle-{{$dish->slug}}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header border-0">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Sicuro di voler eliminare dal menù
+                                        "<strong>{{$dish->name}}</strong>"?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Annulla</button>
+                                        <form action="{{route('admin.dishes.destroy', $dish->slug)}}" method="post"
+                                            class="d-inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Cancella</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Modal -->
+            </div>
             </div>
         </div>
     </div>

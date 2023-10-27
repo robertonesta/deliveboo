@@ -11,6 +11,7 @@ body {
 }
 .navbar {
     height:90px;
+    background-color: $d-boo-darker;
     .logo_laravel {
         position:relative;
         .moto {
@@ -32,6 +33,15 @@ body {
             }
         }
     }
+    button{
+        background-color: $d-boo-orange;
+        &:hover{
+            background-color: $d-boo-background;
+        }
+        &:focus{
+            background-color: $d-boo-background;
+        }
+    }
 }
 .nav-link {
     color:$d-boo-orange;
@@ -42,4 +52,8 @@ body {
 
 td{
     height: 100px;
+}
+
+.bg-orange{
+    background-color: $d-boo-orange;
 }

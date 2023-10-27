@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-<h2 class="fs-4 text-secondary my-4">Modifica il piatto</h2>
+<h2 class="fs-4 my-4">Modifica il piatto</h2>
     @include('partials.validation_error')
-    <form class="p-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
+    <form class="py-4" action="{{route('admin.dishes.update', $dish->slug)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">
@@ -12,12 +12,9 @@
           <input type="text" name="name" id="name" class="form-control" placeholder="Modifica il nome del piatto" value="{{old('name', $dish->name)}}" aria-describedby="helpId">
         </div>
 
-
-
-
         <div class="row mb-3 align-items-center">
           <div class="col-md-12">
-              <label for="photo" class="form-label">Foto</label>
+              <label for="photo" class="form-label">Immagine</label>
           </div>
           <div class="col-md-7">
               <input type="file" name="photo" id="photo" value="{{ old('photo', $dish->photo) }}" class="form-control @error('photo') is-invalid @enderror" />
@@ -28,10 +25,10 @@
               @enderror
           </div>
           <div class="col-md-5 ">
-              @if (Str::contains($dish->photo, 'photo'))
+              @if (Str::contains($dish->photo, 'upload'))
                   <img src="{{ asset('storage/' . $dish->photo) }}" class="card-img-top " alt="...">
               @else
-                  <img class="card-img-top rounded  mb-3" src="{{ asset('storage/' . $dish->photo) }}" alt="">
+                  <img class="card-img-top rounded  mb-3" src="{{  $dish->photo }}" alt="">
               @endif
           </div>
       </div>

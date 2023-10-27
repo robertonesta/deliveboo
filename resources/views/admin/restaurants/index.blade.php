@@ -2,14 +2,14 @@
 @section('content')
 {{-- Mostro solo se esiste un ristorante --}}
 @if(count($restaurants) > 0)
-    <table class="table table-striped table-dark">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Immagine</th>
                 <th scope="col">Indirizzo</th>
-                <th scope="col">Partita iva</th>
-            
+                <th scope="col">Partita iva</th>        
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -18,9 +18,9 @@
             <tr>
                 <th scope="row">{{ $restaurant->id }}</th>
                 <td>{{ $restaurant->name }}</td>
+                <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$restaurant->photo)}}" alt=""></td>
                 <td>{{ $restaurant->address }}</td>
                 <td>{{ $restaurant->piva }}</td>
-               
                 <td class="d-flex justify-content-between align-items-center"> 
                     <a class="btn btn-primary text-decoration-none actions" href="{{ route('admin.restaurants.show', $restaurant) }}">  <i class="fa-solid fa-circle-info"></i></a>
                     <a class="btn btn-warning text-decoration-none actions" href="{{ route('admin.restaurants.edit', $restaurant) }}"> <i class="fa-solid fa-pen"></i></a>
@@ -36,8 +36,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-start text-dark">
-                    Sei sicuro di voler eliminare il ristorante {{ $restaurant->name }} con ID
-                    {{ $restaurant->id }}? <br>
+                    Sei sicuro di voler eliminare il tuo ristorante <strong>{{ $restaurant->name }}</strong>?<br>
                     L'operazione non è reversibile
                 </div>
                 <div class="modal-footer">

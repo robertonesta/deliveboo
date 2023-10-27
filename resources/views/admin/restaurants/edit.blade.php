@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">Modifica il tuo Ristorante</h2>
+    <h2 class="fs-4 my-4">Modifica il tuo Ristorante</h2>
     @include('partials.validation_error')
     <form action="{{ route('admin.restaurants.update', $restaurant) }}" method="POST" enctype="multipart/form-data" class="mb-3">
         @method('PUT') 
@@ -92,9 +92,9 @@
                 @enderror
             </div>
         </div>
-        <div class="row mb-3  align-items-center">
+        <div class="row mb-3 align-items-center">
             <div class="col-md-12">
-                <label for="photo" class="form-label">Foto</label>
+                <label for="photo" class="form-label">Immagine</label>
             </div>
             <div class="col-md-7">
                 <input type="file" name="photo" id="photo" value="{{ old('photo', $restaurant->photo) }}" class="form-control @error('photo') is-invalid @enderror" />
@@ -105,7 +105,7 @@
                 @enderror
             </div>
             <div class="col-md-5 ">
-                @if (Str::contains($restaurant->photo, 'upload'))
+                @if (Str::contains($restaurant->photo, 'photo'))
                     <img src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top " alt="...">
                 @else
                     <img class="card-img-top rounded  mb-3" src="{{ $restaurant->photo }}" alt="">

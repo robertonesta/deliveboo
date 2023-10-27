@@ -29,7 +29,7 @@ class DishController extends Controller
         if($restaurant){
             //get restaurant id
             $restaurantId = $restaurant->id;
-            $dishes = Dish::where('restaurant_id', $restaurantId)->orderByDesc('id')->get();
+            $dishes = Dish::where('restaurant_id', $restaurantId)->orderBy('id')->get();
             return view('admin.dishes.index', compact('dishes'));
         } else {
             return to_route('admin.dishes.create');

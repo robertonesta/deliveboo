@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-7 p-3">
-            @if (Str::contains($dish->photo, 'upload'))
-                <img id="dish_img" src="{{ asset('storage/' .$dish->photo)}}" class="card-img-top rounded" alt="...">
-            @else
-                <img id="dish_img" src="{{$dish->photo}}" alt="">
-            @endif
+        <div class="col-8">
+            @if (Str::contains($dish->photo, 'https'))
+            <img class="w-100 rounded" src="{{$dish->photo}}" alt="">
+        @else
+            <img class="w-100 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
+        @endif
         </div>
         <div class="col-5">
             <div>

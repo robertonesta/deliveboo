@@ -7,6 +7,13 @@
 .fit-cover {
     object-fit: cover;
 }
+.fit-contain {
+    object-fit: contain;
+}
+
+.max-h80 {
+    max-height: 80px;
+}
 
 .main.welcome {
     height: calc(100vh - 90px);

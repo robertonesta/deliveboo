@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-8">
+    <div class="row d-flex justify-content-center align-items-center mt-3">
+        <div class="col-7 p-3">
             @if (Str::contains($dish->photo, 'https'))
-            <img class="w-100 rounded" src="{{$dish->photo}}" alt="">
+            <img id="dish_img" class="rounded" src="{{$dish->photo}}" alt="">
         @else
-            <img class="w-100 rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
+            <img id="dish_img" class="rounded" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
         @endif
         </div>
-        <div class="col-5">
+        <div class="col-5 p-3">
             <div>
                 <h2 class="fs-1 fw-bold pb-4">{{$dish->name}}</h2>
             </div>

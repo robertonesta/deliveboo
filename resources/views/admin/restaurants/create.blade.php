@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">Nuovo Ristorante</h2>
+    <h2 class="fs-4 my-4">Nuovo Ristorante</h2>
     <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
         @csrf
 

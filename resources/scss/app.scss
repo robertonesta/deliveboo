@@ -9,6 +9,9 @@ body {
     background-color: $d-boo-background;
     font-family: 'Open Sans', sans-serif;
 }
+#main_admin{
+    height: calc(100vh - 90px);
+}
 .navbar {
     height:90px;
     background-color: $d-boo-darker;
@@ -59,7 +62,7 @@ td{
 }
 
 #restaurant_img, #dish_img{
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
+    width: 760px;
+    height: 550px;
+    object-fit: contain;
 }

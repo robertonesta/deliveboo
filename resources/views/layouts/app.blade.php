@@ -30,7 +30,6 @@
                 <a class="navbar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
                     <a href="http://localhost:5174/">
                         <div class="logo_laravel w-25">
-
                             <img src="{{asset('/img/deliveboo-logo.png')}}" alt="" class="img-fluid">
                             <img src="{{asset('/img/moto.png')}}" alt="" class="moto">
                         </div>

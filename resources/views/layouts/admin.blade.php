@@ -26,15 +26,17 @@
 
 <body>
     <div id="app">
-        <nav class="navbar sticky-top flex-md-nowrap p-3 shadow">
-            <a class="navbar-brand col-md-3 col-lg-2 mr-0" href="#">Deliveboo</a>
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="dropdown open">
-                <button class="btn dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user()->name }}
-                </button>
+        <nav class="navbar sticky-top flex-md-nowrap p-3 shadow d-flex align-items-center justify-content-around">
+                        <a href="http://localhost:5174/">
+                            <div class="logo_laravel w-25">
+                                <img src="{{asset('/img/deliveboo-logo.png')}}" alt="" class="img-fluid">
+                                <img src="{{asset('/img/moto.png')}}" alt="" class="moto">
+                            </div>
+                        </a>
+                <div class="dropdown open">
+                    <button class="btn dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </button>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -46,7 +48,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid vh-100">
+        <div class="container-fluid">
             <div class="row h-100">
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse px-0 shadow">
                     <div class="position-sticky pt-3">
@@ -68,7 +70,7 @@
                         </ul>
                     </div>
                 </nav>
-                <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <main id="main_admin" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     @yield('content')
                 </main>
             </div>

@@ -10,9 +10,9 @@
     <div class="row justify-content-center align-items-center mt-3">
         <div class="col-7 p-3">
             @if (Str::contains($restaurant->photo, 'http'))
-            <img id="restaurant_img" id="restaurant_img" src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top rounded" alt="...">
-        @else
-            <img id="restaurant_img" id="restaurant_img" class="card-img-top rounded" src="{{$restaurant->photo }}" alt="">
+            <img id="restaurant_img" class="card-img-top rounded" src="{{$restaurant->photo }}" alt="">
+            @else
+            <img id="restaurant_img" src="{{ asset('storage/' . $restaurant->photo) }}" class="card-img-top rounded" alt="...">
         @endif
         </div>
         <div class="col-5 p-3">

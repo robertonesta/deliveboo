@@ -17,7 +17,13 @@
         @foreach ($restaurants as $restaurant)
         <tr class="text-center align-middle">
             <td scope="row">{{ $restaurant->name }}</td>
-            <td scope="row"><img class="h-100 fit-cover" width="100px" src="{{ asset('storage/' .$restaurant->photo)}}" alt=""></td>
+            <td scope="row">   
+                @if (Str::contains($restaurant->photo, 'http'))
+                    <img class="rounded object-fit-cover" width="100px" height="80px" src="{{$restaurant->photo}}" alt="">
+                @else
+                    <img class="rounded object-fit-cover" width="100px" height="80px" src="{{ asset('storage/' .$restaurant->photo)}}" alt="...">
+                @endif
+            </td>
             <td scope="row">{{ $restaurant->address }}</td>
             <td scope="row">{{ $restaurant->piva }}</td>
         </tr>

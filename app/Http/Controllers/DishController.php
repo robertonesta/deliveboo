@@ -136,6 +136,16 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+
+    // Ottengo il percorso completo dell'immagine nello storage
+    $imagePath = storage_path('app/public/' . $dish->photo);
+    
+    // Verifica se l'immagine esiste nello storage prima di tentare di eliminarla
+    if (Storage::exists($dish->photo)) {
+        // Elimino l'immagine dallo storage
+        Storage::delete($dish->photo);
+    }
+  
         $dish->delete();
         return to_route('admin.dishes.index')->with('message', 'Il piatto è stato eliminato correttamente');
     }

@@ -148,14 +148,15 @@ class RestaurantController extends Controller
      */
  public function destroy(Restaurant $restaurant)
 {
-    // Ottieni il percorso completo dell'immagine nello storage
+    // Ottiengo il percorso completo dell'immagine nello storage
     $imagePath = storage_path('app/public/' . $restaurant->photo);
-
-    // Verifica se l'immagine esiste nello storage prima di tentare di eliminarla
-    if (Storage::exists($imagePath)) {
-        // Elimina l'immagine dallo storage
-        Storage::delete($imagePath);
+    
+    // Verifico se l'immagine esiste nello storage prima di tentare di eliminarla
+    if (Storage::exists($restaurant->photo)) {
+        // Elimino l'immagine dallo storage
+        Storage::delete($restaurant->photo);
     }
+  
 
     // Elimina il ristorante dal database
     $restaurant->delete();

@@ -9,9 +9,9 @@
     <div class="row d-flex justify-content-center my-5">
         <div class="col-7">
             @if (Str::contains($restaurant->photo, 'http'))
-            <img id="restaurant_img" class="rounded" src="{{$restaurant->photo }}" alt="">
+            <img id="restaurant_img" class="rounded w-100 h-100" src="{{$restaurant->photo }}" alt="">
             @else
-            <img id="restaurant_img" src="{{ asset('storage/' . $restaurant->photo) }}" class="rounded" alt="...">
+            <img id="restaurant_img" src="{{ asset('storage/' . $restaurant->photo) }}" class="rounded w-100 h-100" alt="...">
         @endif
         </div>
         <div class="col-5 d-flex flex-column justify-content-around">

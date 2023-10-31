@@ -5,9 +5,9 @@
     <div class="row d-flex justify-content-center my-5">
         <div class="col-7">
             @if (Str::contains($dish->photo, 'http'))
-            <img id="dish_img" src="{{$dish->photo}}" alt="">
+            <img id="dish_img" class="w-100 h-100" src="{{$dish->photo}}" alt="">
         @else
-            <img id="dish_img" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
+            <img id="dish_img" class="w-100 h-100" src="{{ asset('storage/' .$dish->photo)}}" alt="...">
         @endif
         </div>
         <div class="col-5 d-flex flex-column justify-content-around">

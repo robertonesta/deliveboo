@@ -78,97 +78,93 @@ class RestaurantTypology extends Seeder
             ],
             15 => [
                 'restaurant_id' => 5,
-                'typology_id' => 7,
+                'typology_id' => 11,
             ],
             16 => [
                 'restaurant_id' => 5,
-                'typology_id' => 11,
-            ],
-            17 => [
-                'restaurant_id' => 5,
                 'typology_id' => 12,
             ],
-            18 => [
+            17 => [
                 'restaurant_id' => 6,
                 'typology_id' => 1,
             ],
-            19 => [
+            18 => [
                 'restaurant_id' => 6,
                 'typology_id' => 9,
             ],
-            20 => [
+            19 => [
                 'restaurant_id' => 6,
                 'typology_id' => 8,
             ],
-            21 => [
+            20 => [
                 'restaurant_id' => 6,
                 'typology_id' => 11,
             ],
-            22 => [
+            21 => [
                 'restaurant_id' => 6,
                 'typology_id' => 6,
             ],
-            23 => [
+            22 => [
                 'restaurant_id' => 6,
+                'typology_id' => 7,
+            ],
+            23 => [
+                'restaurant_id' => 7,
                 'typology_id' => 7,
             ],
             24 => [
                 'restaurant_id' => 7,
-                'typology_id' => 7,
+                'typology_id' => 4,
             ],
             25 => [
                 'restaurant_id' => 7,
-                'typology_id' => 4,
+                'typology_id' => 10,
             ],
             26 => [
                 'restaurant_id' => 7,
-                'typology_id' => 10,
+                'typology_id' => 11,
             ],
             27 => [
-                'restaurant_id' => 7,
-                'typology_id' => 11,
+                'restaurant_id' => 8,
+                'typology_id' => 1,
             ],
             28 => [
                 'restaurant_id' => 8,
-                'typology_id' => 1,
+                'typology_id' => 2,
             ],
             29 => [
-                'restaurant_id' => 8,
-                'typology_id' => 2,
+                'restaurant_id' => 9,
+                'typology_id' => 6,
             ],
             30 => [
                 'restaurant_id' => 9,
-                'typology_id' => 6,
+                'typology_id' => 9,
             ],
             31 => [
-                'restaurant_id' => 9,
-                'typology_id' => 9,
+                'restaurant_id' => 10,
+                'typology_id' => 1,
             ],
             32 => [
                 'restaurant_id' => 10,
-                'typology_id' => 1,
+                'typology_id' => 9,
             ],
             33 => [
                 'restaurant_id' => 10,
-                'typology_id' => 9,
-            ],
-            34 => [
-                'restaurant_id' => 10,
                 'typology_id' => 12,
             ],
-            35 => [
+            34 => [
                 'restaurant_id' => 11,
                 'typology_id' => 11,
             ],
-            36 => [
+            35 => [
                 'restaurant_id' => 11,
                 'typology_id' => 12,
             ],
-            37 => [
+            36 => [
                 'restaurant_id' => 11,
                 'typology_id' => 7,
             ],
-            38 => [
+            37 => [
                 'restaurant_id' => 12,
                 'typology_id' => 1,
             ],
@@ -176,31 +172,31 @@ class RestaurantTypology extends Seeder
                 'restaurant_id' => 12,
                 'typology_id' => 6,
             ],
-            40 => [
+            39 => [
                 'restaurant_id' => 13,
                 'typology_id' => 13,
             ],
-            41 => [
+            40 => [
                 'restaurant_id' => 13,
                 'typology_id' => 14,
             ],
-            42 => [
+            41 => [
                 'restaurant_id' => 14,
                 'typology_id' => 1,
             ],
-            43 => [
+            42 => [
                 'restaurant_id' => 14,
                 'typology_id' => 5,
             ],
-            44 => [
+            43 => [
                 'restaurant_id' => 15,
                 'typology_id' => 14,
             ],
-            45 => [
+            44 => [
                 'restaurant_id' => 15,
                 'typology_id' => 5,
             ],
-            46 => [
+            45 => [
                 'restaurant_id' => 15,
                 'typology_id' => 9,
             ],

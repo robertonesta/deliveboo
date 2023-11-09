@@ -76,31 +76,27 @@ class RestaurantTypology extends Seeder
                 'restaurant_id' => 5,
                 'typology_id' => 7,
             ],
-            16 => [
+            15 => [
                 'restaurant_id' => 5,
                 'typology_id' => 7,
             ],
             16 => [
                 'restaurant_id' => 5,
-                'typology_id' => 1,
+                'typology_id' => 11,
             ],
             17 => [
                 'restaurant_id' => 5,
-                'typology_id' => 11,
-            ],
-            18 => [
-                'restaurant_id' => 5,
                 'typology_id' => 12,
             ],
-            19 => [
+            18 => [
                 'restaurant_id' => 6,
                 'typology_id' => 1,
             ],
-            20 => [
+            19 => [
                 'restaurant_id' => 6,
                 'typology_id' => 9,
             ],
-            21 => [
+            20 => [
                 'restaurant_id' => 6,
                 'typology_id' => 8,
             ],

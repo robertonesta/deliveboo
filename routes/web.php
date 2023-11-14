@@ -60,11 +60,11 @@ Route::post('/checkout', function(Request $request) {
         'publicKey' => config('services.braintree.publicKey'),
         'privateKey' => config('services.braintree.privateKey')
       ]);
-    $totalprice = $request->totalprice;
+    $amount = $request->amount;
     $nonce = $request->payment_method_nonce;
 
     $result = $gateway->transaction()->sale([
-        'totalprice' => $totalprice,
+        'amount' => $amount,
         'paymentMethodNonce' => $nonce,
         'options' => [
             'submitForSettlement' => true

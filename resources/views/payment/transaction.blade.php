@@ -22,11 +22,11 @@
         @csrf
 
         <section>
-            <label for="totalprice">
+            <label for="amount">
                 <span class="input-label">Quota</span>
             </label>
-            <div class="input-wrapper totalprice-wrapper">
-                <input type="tel" id="totalprice" name="totalprice" min="1" placeholder="Inserisci una quota da pagare" value="10">
+            <div class="input-wrapper amount-wrapper">
+                <input type="tel" id="amount" name="amount" min="1" placeholder="Inserisci una quota da pagare" value="10">
             </div>
         </section>
 

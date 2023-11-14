@@ -16,4 +16,6 @@ class TypologiesController extends Controller
 		    'typologies' => $typologies,
 	    ]);
     }
+
+
 }

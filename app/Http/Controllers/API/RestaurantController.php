@@ -16,6 +16,7 @@ class RestaurantController extends Controller
 	    ]);
     }
 
+
 	public function typologiesSearch(Request $request) {
 
         $typologyIds = $request->input('typologyIds'); // Leggi il valore da Vue.js
@@ -35,7 +36,6 @@ class RestaurantController extends Controller
             'restaurants' => $restaurants,
         ]);
     }
-	
 
     public function show($slug){
         $restaurant = Restaurant::with('dishes', 'typologies')->where('slug', $slug)->first();

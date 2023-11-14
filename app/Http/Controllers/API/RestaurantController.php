@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
-
 class RestaurantController extends Controller
 {
     public function index() {
@@ -17,34 +16,25 @@ class RestaurantController extends Controller
 	    ]);
     }
 
-	// public function typologiesSearch(Request $request ) {
-	// 	$typologyId = '1'; 
-
-	// 	$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
-    // 	$query->where('typology_id', $typologyId);
-	// 	})
-	// 	// ->join('typologies' , 'restaurants.id', '=', 'typologies.id')	// ->select('name')
-	// 	->get();
-		
-	
-	// 	return response()->json([
-	// 		'success' => true,
-	// 		'restaurants' => $restaurants,
-	// 	]);
-	// }
-
 	public function typologiesSearch(Request $request) {
-		$typologyId = $request->input('typologyId'); // Leggi il valore da Vue.js
-	
-		$restaurants = Restaurant::whereHas('typologies', function($query) use ($typologyId) {
-			$query->where('typology_id', $typologyId);
-		})->get();
-	
-		return response()->json([
-			'success' => true,
-			'restaurants' => $restaurants,
-		]);
-	}
+
+        $typologyIds = $request->input('typologyIds'); // Leggi il valore da Vue.js
+        //dd($typologyIds);
+        $restaurants_query = Restaurant::query();
+        foreach($typologyIds as $typologyId) {
+            $restaurants_query->whereHas('typologies', function($query) use ($typologyId) {
+                $query->where('typology_id', $typologyId);
+            });
+        }
+
+        $restaurants = $restaurants_query->with('typologies')->get();
+        //dd($restaurants);
+
+        return response()->json([
+            'success' => true,
+            'restaurants' => $restaurants,
+        ]);
+    }
 	
 
     public function show($slug){
@@ -64,10 +54,3 @@ class RestaurantController extends Controller
             }
     }
 }
-
-
-
-// $restaurantType = DB::table('restaurants')
-//         ->join('typologies' , 'restaurants.id', '=', 'typologies.restaurant_id')
-//         ->select('restaurants.', 'typologies.')
-//         ->get();

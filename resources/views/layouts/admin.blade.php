@@ -66,6 +66,10 @@
                                     <i class="fa-solid fa-book-open"></i>
                                     {{__('Menù')}}
                                 </a>
+                                <a class="nav-link text-dark {{Route::currentRouteName() == 'admin.orders.index' ? 'bg-orange' : ''}}" aria-current="page" href="{{route('admin.orders.index')}}">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    {{__('Ordini')}}
+                                </a>
                             </li>
                         </ul>
                     </div>

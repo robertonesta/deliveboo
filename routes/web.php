@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/restaurants', RestaurantController::class)->parameters(['restaurants'=>'restaurant:slug']);
     Route::resource('/dishes', DishController::class)->parameters(['dishes'=>'dish:slug']);
+    Route::resource('/orders', OrderController::class);
 });
 
 

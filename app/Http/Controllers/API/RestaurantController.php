@@ -21,7 +21,9 @@ class RestaurantController extends Controller
 	public function typologiesSearch(Request $request) {
 		$typologyIds = $request->input('typologyIds'); // Leggi il valore da Vue.js
 		//dd($typologyIds);
+		//creaimao un istanza query
 		$restaurants_query = Restaurant::query();
+		//per ogni tipologia facciamo una query
 		foreach($typologyIds as $typologyId) {
 			$restaurants_query->whereHas('typologies', function($query) use ($typologyId) {
 				$query->where('typology_id', $typologyId);

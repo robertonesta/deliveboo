@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RestaurantController;
@@ -25,3 +26,4 @@ Route::get('restaurants', [RestaurantController::class, 'index']);
 Route::get('typologies', [TypologiesController::class, 'index']);
 Route::post('/searchRestaurants', [RestaurantController::class, 'typologiesSearch']);
 Route::get('/restaurants/{slug}', [RestaurantController::class, 'show']);
+Route::post('/orders', [OrderController::class, 'index']);

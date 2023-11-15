@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/transaction', function () {
+
+
+Route::get('/transaction/{total}', function ($total) {
 
     $gateway = new Braintree\Gateway([
         'environment' => config('services.braintree.environment'),
@@ -47,10 +49,9 @@ Route::get('/transaction', function () {
       ]);
 
       $token = $gateway->ClientToken()->generate();
-      return view('payment.transaction', [
-        'token' => $token, ]
+      return view('payment.transaction', compact('token',  'total')
     );
-});
+})->name('payment.transaction');
 
 Route::post('/checkout', function(Request $request) {
     
@@ -74,7 +75,9 @@ Route::post('/checkout', function(Request $request) {
     if ($result->success) {
         $transaction = $result->transaction;
 
-        return back()->with('message', 'Transazione avvenuta con successo.');
+        //return back()->with('message', 'Transazione avvenuta con successo.');
+        //return redirect('http://localhost:5174/')->with('message', 'Transazione avvenuta con successo.');
+        return redirect('http://localhost:5174/?message=Transazione+avvenuta+con+successo');
     } else {
         $errorString = "";
 

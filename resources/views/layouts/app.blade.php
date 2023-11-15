@@ -20,6 +20,7 @@
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
     <!-- Braintree -->
+  <!--   @vite(['resources/js/braintree.js']) -->
     <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.min.js"></script>
     
 </head>

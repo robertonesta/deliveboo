@@ -3,9 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 
 /*
@@ -39,56 +41,9 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/transaction/{total}', function ($total) {
+Route::get('/transaction/{total}', [TransactionController::class, 'showTransaction'])->name('payment.transaction');
 
-    $gateway = new Braintree\Gateway([
-        'environment' => config('services.braintree.environment'),
-        'merchantId' => config('services.braintree.merchantId'),
-        'publicKey' => config('services.braintree.publicKey'),
-        'privateKey' => config('services.braintree.privateKey')
-      ]);
-
-      $token = $gateway->ClientToken()->generate();
-      return view('payment.transaction', compact('token',  'total')
-    );
-})->name('payment.transaction');
-
-Route::post('/checkout', function(Request $request) {
-    
-    $gateway = new Braintree\Gateway([
-        'environment' => config('services.braintree.environment'),
-        'merchantId' => config('services.braintree.merchantId'),
-        'publicKey' => config('services.braintree.publicKey'),
-        'privateKey' => config('services.braintree.privateKey')
-      ]);
-    $amount = $request->amount;
-    $nonce = $request->payment_method_nonce;
-
-    $result = $gateway->transaction()->sale([
-        'amount' => $amount,
-        'paymentMethodNonce' => $nonce,
-        'options' => [
-            'submitForSettlement' => true
-        ]
-        ]);
-
-    if ($result->success) {
-        $transaction = $result->transaction;
-
-        //return back()->with('message', 'Transazione avvenuta con successo.');
-        //return redirect('http://localhost:5174/')->with('message', 'Transazione avvenuta con successo.');
-        return redirect('http://localhost:5174/?message=Transazione+avvenuta+con+successo');
-    } else {
-        $errorString = "";
-
-        foreach($result->errors->deepAll() as $error) {
-            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-        }
-
-        return back()->withErrors('C\'è stato un errore:'.$result->message);
-    }
-
-});
+Route::post('/checkout', [CheckoutController::class, 'index']);
 
 require __DIR__.'/auth.php';
 

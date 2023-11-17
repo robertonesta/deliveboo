@@ -92,7 +92,57 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $user_id = Auth::id();
+        //l'ordine dove il dish ha il restaurant_id = all'user_id
+        //$dishes = Dish::where('restaurant_id', $user_id)->get();
+
+        $orders = Dish::join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')
+        ->join('orders', 'dish_order.order_id', '=', 'orders.id')
+        ->where('dishes.restaurant_id', '=', $user_id)
+        ->select('orders.*', 'dishes.name AS dish_name', 'dish_order.quantity', 'dishes.price')
+        ->get();
+
+        $order_id = $order->id;
+
+        $merged = [];
+        foreach ($orders as $order) {
+            $orderId = $order->id;
+            $order_name = $order->name;
+            $order_lastname = $order->lastname;
+            $order_address = $order->address;
+            $order_phone = $order->phone;
+            $order_status = $order->status;
+            $order_totalprice = $order->totalprice;
+            // Se l'ordine non è ancora presente nell'array, lo aggiungiamo
+            if (!isset($merged[$orderId])) {
+                $merged[$orderId] = [
+                    'order_id' => $orderId,
+                    'order_name' => $order_name,
+                    'order_lastname' => $order_lastname,
+                    'order_address' => $order_address,
+                    'order_phone' => $order_phone,
+                    'order_status' => $order_status,
+                    'order_totalprice' => $order_totalprice,
+                    'dishes' => [],
+                ];
+            }
+            // Aggiungiamo l'articolo all'ordine corrente
+            $merged[$orderId]['dishes'][] = [
+                'dish_name' => $order->dish_name,
+                'price' => $order->price,
+                'quantity' => $order->quantity,
+            ];
+            
+            $single_order = array_filter($merged, function($merge) use ($order_id) {
+                //return $merge['order_id'] === $order_id;
+                if($merge['order_id'] === $order_id) {
+                    return $merge;
+                }
+            });
+            
+            
+        }
+        return view ('admin.orders.show', compact('single_order'));
     }
 
     /**
@@ -126,6 +176,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return to_route('admin.orders.index')->with('message', 'L\'ordine è stato eliminato correttamente');
     }
 }

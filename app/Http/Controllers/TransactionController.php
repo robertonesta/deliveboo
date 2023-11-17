@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+
 use Braintree\Gateway;
 use Illuminate\Http\Request;
+
 
 class TransactionController extends Controller
 {
@@ -16,7 +19,6 @@ class TransactionController extends Controller
         ]);
 
         $token = $gateway->ClientToken()->generate();
-
         return view('payment.transaction', compact('token', 'total'));
     }
 }

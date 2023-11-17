@@ -1,0 +1,10 @@
+@use '../variables.scss' as *;
+
+#index_orders{
+    .card{
+        .card-body{
+            height: 135px;
+            overflow-y: auto;
+        }
+    }
+}

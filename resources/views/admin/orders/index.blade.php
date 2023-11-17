@@ -9,10 +9,10 @@
   </div>
   @endif
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+    @if($merged)
+    @foreach ($merged as $merge)
+    @if($merge['order_status'] === 1)
     <div class="col">
-      @if($merged)
-      @foreach ($merged as $merge)
-      @if($merge['order_status'] === 1)
         <div class="card">
           <div class="card-header"> Ordine n.{{$merge['order_id']}}</div>
           <div class="card-body d-flex flex-column justify-content-between align-items-start">
@@ -28,13 +28,11 @@
             <div>€{{$merge['order_totalprice']}}</div>
           </div>
         </div>
+      </div>
       @endif
       @endforeach
       @else
-      <tr>Nessun ordine ricevuto.</tr>
-      </tbody>
-      </table>
-    </div>
+      <p>Nessun ordine ricevuto.</p>
     @endif
   </div>
 </div>

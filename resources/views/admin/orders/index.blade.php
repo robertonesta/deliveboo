@@ -14,7 +14,16 @@
     @if($merge['order_status'] === 1)
     <div class="col">
         <div class="card">
-          <div class="card-header"> Ordine n.{{$merge['order_id']}}</div>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              Ordine n.{{$merge['order_id']}}
+            </div>
+            <div>
+            <a class="me-3 action_btn action_show p-2" href="{{ route('admin.orders.show', $merge['order_id']) }}" title="Show order">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+            </div>
+          </div>
           <div class="card-body d-flex flex-column justify-content-between align-items-start">
             @foreach ($merge['dishes'] as $dish)
             <div class="d-flex justify-content-between w-100">

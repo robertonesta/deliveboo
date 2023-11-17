@@ -1,0 +1,10 @@
+@use '../variables.scss' as *;
+
+#show_orders{
+    .card:first-child{
+        .card-body{
+            height: 135px;
+            overflow-y: auto;
+        }
+    }
+}

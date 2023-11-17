@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+
 
 class CheckoutController extends Controller
 {
@@ -30,7 +32,12 @@ class CheckoutController extends Controller
 
         if ($result->success) {
             $transaction = $result->transaction;
-
+            //change status of order
+            $order = Order::orderByDesc('created_at')->first();
+            if ($order) {
+                $order->status = 1;
+                $order->save();
+            }
             //return back()->with('message', 'Transazione avvenuta con successo.');
             //return redirect('http://localhost:5174/')->with('message', 'Transazione avvenuta con successo.');
             return redirect('http://localhost:5174/?message=Transazione+avvenuta+con+successo');

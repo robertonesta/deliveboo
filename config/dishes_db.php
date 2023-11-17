@@ -460,7 +460,7 @@ return  [
 ],
 
 [
-    "name"=>"Guinnes",
+    "name"=>"Guinness",
     "price"=>"3",
     "image"=>"https://www.gruppolazialebevande.it/wp-content/uploads/2016/04/0593_guinnessdraught.png",
     "restaurant_id" => [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],

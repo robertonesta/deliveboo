@@ -19,7 +19,6 @@
         <table class="table table-dark  table-hover table-striped">
       <thead class="text-center">
         <tr>
-          <th scope="col">ID</th>
           <th scope="col">Nome</th>
           <th scope="col">Immagine</th>
           <th scope="col" width="25%">Descrizione</th>
@@ -32,7 +31,6 @@
       <tbody class="text-center">
         @forelse ($dishes as $dish)
         <tr class="align-middle">
-          <td  scope="row">{{$dish->id}}</td>
           <td scope="row">{{$dish->name}}</td>
           <td scope="row">   @if (Str::contains($dish->photo, 'http'))
             <img class="w-100 object-fit-cover max-h80 rounded" src="{{$dish->photo}}" alt="">

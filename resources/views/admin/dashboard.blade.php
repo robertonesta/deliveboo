@@ -1,35 +1,42 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container">
-<h2 class="fs-4 my-4">Dashboard</h2>
+<div class="container py-5">
 {{-- Mostro solo se esiste un ristorante --}}
 @if(count($restaurants) > 0)
-<table class="table table-striped">
-    <thead class="text-center">
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Immagine</th>
-            <th scope="col">Indirizzo</th>
-            <th scope="col">Partita iva</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($restaurants as $restaurant)
-        <tr class="text-center align-middle">
-            <td scope="row">{{ $restaurant->name }}</td>
-            <td scope="row">   
-                @if (Str::contains($restaurant->photo, 'http'))
-                    <img class="rounded object-fit-cover" width="100px" height="80px" src="{{$restaurant->photo}}" alt="">
-                @else
-                    <img class="rounded object-fit-cover" width="100px" height="80px" src="{{ asset('storage/' .$restaurant->photo)}}" alt="...">
-                @endif
-            </td>
-            <td scope="row">{{ $restaurant->address }}</td>
-            <td scope="row">{{ $restaurant->piva }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+@foreach ($restaurants as $restaurant)
+<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+    <div class="col">
+        <div class="card bg-transparent border-0">
+        <a class="nav-link text-dark" aria-current="page" href="{{route('admin.restaurants.create')}}">
+                <div id="img" class="h-75 w-75 object-fit-cover text-center mx-auto">
+                    <img class="img-fluid" src="{{ asset('img/restaurant.png')}}" alt="">
+                </div>
+                <h3 class="text-center orange fw-bold mt-3">Dettagli Ristorante</h3>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card bg-transparent border-0">
+            <a class="nav-link text-dark" aria-current="page" href="{{route('admin.dishes.index')}}">
+                <div id="img" class="h-75 w-75 object-fit-cover text-center mx-auto">
+                    <img class="img-fluid" src="{{ asset('img/menu.png')}}" alt="">
+                </div>
+                <h3 class="text-center orange fw-bold mt-3">Menù</h3>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card bg-transparent border-0">
+            <a class="nav-link text-dark" aria-current="page" href="{{route('admin.orders.index')}}">
+                <div id="img" class="h-75 w-75 object-fit-cover text-center mx-auto">
+                    <img class="img-fluid" src="{{ asset('img/bill.png')}}" alt="">
+                </div>
+                <h3 class="text-center orange fw-bold mt-3">Ordini</h3>
+            </a>
+        </div>
+    </div>
+</div>
+@endforeach
 {{-- Mostro il pulsante per creare il ristorante --}}
 @else
 @if (session('message'))

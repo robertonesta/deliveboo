@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" id="index_orders">
-  <h2 class="fs-4 my-4">Ordini</h2>
+  <h2 class="fs-4 my-4">Ordini ricevuti</h2>
   @if (session('message'))
   <div class="alert alert-success" role="alert">
     <strong>{{ session('message') }}</strong>

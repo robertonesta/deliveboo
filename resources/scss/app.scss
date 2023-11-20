@@ -13,6 +13,7 @@ body {
 
 #main_admin {
     height: calc(100vh - 90px);
+    overflow-y: scroll;
 }
 
 .navbar {
@@ -71,6 +72,10 @@ td {
 
 .bg-orange {
     background-color: $d-boo-orange;
+}
+
+.orange{
+    color: $d-boo-orange;
 }
 
 #restaurant_img,

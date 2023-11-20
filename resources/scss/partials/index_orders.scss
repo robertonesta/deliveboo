@@ -2,9 +2,37 @@
 
 #index_orders{
     .card{
+        .card-header{
+            background: $d-boo-darker;
+            color:white;
+            i {
+                color:$d-boo-orange;
+            }
+        }
         .card-body{
             height: 135px;
+            background-color: rgba(255, 255, 255, 0.8);
+            //background:url('/img/logo-complete.png');
+            background-size:30px;
+            background-position: center;
+            background-repeat:space;
+            filter: grayscale(100%);
             overflow-y: auto;
+            .layer {
+                position: relative;
+                z-index:1;
+                height: 100%;
+                width:100%;
+            }
+        }
+        .card-footer{
+            background: $d-boo-darker;
+            strong {
+                color:$d-boo-orange;
+            }
+            span {
+                color:white;
+            }
         }
     }
 }

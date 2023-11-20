@@ -25,7 +25,7 @@ class OrderController extends Controller
         ->join('orders', 'dish_order.order_id', '=', 'orders.id')
         ->where('dishes.restaurant_id', '=', $user_id)
         ->select('orders.*', 'dishes.name AS dish_name', 'dish_order.quantity', 'dishes.price')
-        ->get();
+        ->orderByDesc('orders.id')->get();
 
         $merged = [];
         foreach ($orders as $order) {

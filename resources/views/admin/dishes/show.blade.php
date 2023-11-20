@@ -44,11 +44,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content bg-dark">
                         <div class="modal-header border-0">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
+                            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Attenzione!</h1>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body text-white">
                             Sicuro di voler eliminare dal menù
                             "<strong>{{$dish->name}}</strong>"?
                         </div>

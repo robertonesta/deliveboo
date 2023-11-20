@@ -29,7 +29,7 @@ class DishController extends Controller
         if($restaurant){
             //get restaurant id
             $restaurantId = $restaurant->id;
-            $dishes = Dish::where('restaurant_id', $restaurantId)->orderBy('id')->get();
+            $dishes = Dish::where('restaurant_id', $restaurantId)->orderByDesc('id')->get();
             return view('admin.dishes.index', compact('dishes'));
         } else {
             return to_route('admin.dishes.create');
@@ -117,6 +117,7 @@ class DishController extends Controller
      */
     public function update(UpdateDishRequest $request, Dish $dish)
     {
+        //dd($request);
         $visible = $request->has('visible') ? 1 : 0;
         $val_data = $request->validated();
         if ($request->hasFile('photo')) {
@@ -125,7 +126,7 @@ class DishController extends Controller
         };
         $val_data['visible'] = $visible;
         $dish->update($val_data);
-        return redirect()->route('admin.dishes.index', $dish)->with('message', 'Il nuovo piatto è stato modificato correttamente');
+        return redirect()->route('admin.dishes.index', $dish)->with('message', 'Il nuovo piatto è stato modificato correttamente.');
     }
 
     /**

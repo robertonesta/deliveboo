@@ -16,7 +16,7 @@
     </div>
     @if($dishes->count() > 0)
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-dark  table-hover table-striped">
       <thead class="text-center">
         <tr>
           <th scope="col">ID</th>
